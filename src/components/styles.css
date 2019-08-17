@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+html {
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 16px;
+	color: black;
+	background-color: white;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin: 8px 0;
+}
+
+#gatsby-noscript {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	padding-left: 16px;
+	background: red;
+	color: white;
+	vertical-align: middle;
+}
+#gatsby-noscript::before {
+	content: '⚠️';
+}

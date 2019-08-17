@@ -1,0 +1,41 @@
+{
+  "name": "blog",
+  "description": "Personal blog build with Gatsby and Netlify CMS",
+  "private": true,
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
+    "lint:fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@material-ui/styles": "^4.3.0",
+    "gatsby": "^2.13.64",
+    "gatsby-plugin-manifest": "^2.1.1",
+    "gatsby-plugin-material-ui": "^2.1.5",
+    "gatsby-plugin-offline": "^2.2.6",
+    "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sharp": "^2.2.11",
+    "gatsby-plugin-typescript": "^2.0.13",
+    "gatsby-source-filesystem": "^2.1.9",
+    "gatsby-transformer-sharp": "^2.2.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/react-helmet": "^5.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-typescript": "^4.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "typescript": "^3.4.5"
+  }
+}
