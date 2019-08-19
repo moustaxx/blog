@@ -31,34 +31,37 @@ const useStyles = makeStyles({
 const Error404 = () => {
 	const classes = useStyles();
 
-	const goBack = () => window.history.back();
-	const goHome = () => navigate('/');
+	if (typeof window !== 'undefined') {
+		const goBack = () => window.history.back();
+		const goHome = () => navigate('/');
 
-	return (
-		<Layout>
-			<div className={classes.root}>
-				<h1 className={classes.heading}>404</h1>
-				<span>Page not found</span>
-				<code className={classes.path}>{window.location.pathname}</code>
-				<div className={classes.buttonsContainer}>
-					<button
-						className={classes.btn}
-						onClick={goBack}
-						onKeyDown={goBack}
-						type="button"
-						children="Go back"
-					/>
-					<button
-						className={classes.btn}
-						onClick={goHome}
-						onKeyDown={goHome}
-						type="button"
-						children="Go to homepage"
-					/>
+		return (
+			<Layout>
+				<div className={classes.root}>
+					<h1 className={classes.heading}>404</h1>
+					<span>Page not found</span>
+					<code className={classes.path}>{window.location.pathname}</code>
+					<div className={classes.buttonsContainer}>
+						<button
+							className={classes.btn}
+							onClick={goBack}
+							onKeyDown={goBack}
+							type="button"
+							children="Go back"
+						/>
+						<button
+							className={classes.btn}
+							onClick={goHome}
+							onKeyDown={goHome}
+							type="button"
+							children="Go to homepage"
+						/>
+					</div>
 				</div>
-			</div>
-		</Layout>
-	);
+			</Layout>
+		);
+	}
+	return null;
 };
 
 export default Error404;
