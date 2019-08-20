@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/styles';
 
 import './styles.css';
+import 'typeface-roboto';
+import 'typeface-roboto-slab';
 import config from '../../website';
 import TopBar from './TopBar';
 import Footer from './Footer';

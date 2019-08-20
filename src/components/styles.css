@@ -5,13 +5,19 @@
 	vertical-align: baseline;
 }
 html {
-	font-family: Roboto, Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: black;
+	color: hsla(0,0%,0%,0.9);
 	background-color: white;
 }
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6 {
 	margin: 8px 0;
+	font-family: 'Roboto Slab';
+}
+p {
+	margin: 8px 0;
+	font-size: 1.1rem;
+	color: hsla(0,0%,0%,0.75);
 }
 
 #gatsby-noscript {
