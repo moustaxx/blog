@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import DOMPurify from 'dompurify';
 
 import Layout from '../components/Layout';
+import { IFrontmatter } from '../interfaces';
 
 const useStyles = makeStyles({
 	content: {
@@ -17,16 +18,11 @@ const useStyles = makeStyles({
 	},
 }, { name: 'Index' });
 
-
 interface IMarkdownRemark {
 	data: {
 		markdownRemark: {
 			html: string;
-			frontmatter: {
-				date: string | Date | number;
-				path: string;
-				title: string;
-			};
+			frontmatter: IFrontmatter;
 		};
 	};
 }
