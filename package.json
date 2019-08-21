@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@material-ui/styles": "^4.3.0",
+		"dompurify": "^1.0.11",
 		"gatsby": "^2.13.64",
 		"gatsby-plugin-manifest": "^2.1.1",
 		"gatsby-plugin-material-ui": "^2.1.5",
@@ -40,6 +41,7 @@
 		"typography-theme-ocean-beach": "^0.16.19"
 	},
 	"devDependencies": {
+		"@types/dompurify": "^0.0.33",
 		"@types/react-helmet": "^5.0.8",
 		"@types/typography": "^0.16.2",
 		"@typescript-eslint/eslint-plugin": "^2.0.0",
