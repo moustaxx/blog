@@ -1,16 +1,23 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
-    "jsx": "preserve",
-    "lib": ["dom", "esnext"],
-    "strict": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-	 "noUnusedLocals": false,
-	 "skipLibCheck": true,
-	 "allowJs": true
-  },
-  "exclude": ["node_modules", "public", ".cache"]
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "esnext",
+		"jsx": "preserve",
+		"lib": ["dom", "esnext"],
+		"strict": true,
+		"noEmit": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noUnusedLocals": false,
+		"skipLibCheck": true,
+		"allowJs": true
+	},
+	"include": [
+		"./*.js",
+		"./src/**/*.js",
+		"./src/**/*.ts",
+		"./src/**/*.tsx",
+		"./typings/**/*.ts"
+	],
+	"exclude": ["node_modules", "public", ".cache"]
 }
