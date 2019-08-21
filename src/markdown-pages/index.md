@@ -1,8 +1,7 @@
 ---
-templateKey: "blogTemplate"
-path: "/blog/my-first-post"
-date: "2019-05-04"
-title: "My first blog post"
+templateKey: "indexTemplate"
+path: "/"
+title: "Index page"
 ---
 
 The SCAA updated the wheel to reflect the finer nuances needed to describe flavors more precisely. The new descriptions are more detailed and hence allow cuppers to distinguish between more flavors.

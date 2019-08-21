@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 
-const blogPostTemplate = path.resolve('./src/templates/blogTemplate.tsx');
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
 	const { createPage } = actions;
 
@@ -16,6 +14,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 					node {
 						frontmatter {
 							path
+							templateKey
 						}
 					}
 				}
@@ -23,7 +22,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 		}
 	`);
 
-	// Handle errors
 	if (result.errors) {
 		reporter.panicOnBuild('Error while running GraphQL query.');
 		return;
@@ -32,7 +30,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
 		createPage({
 			path: node.frontmatter.path,
-			component: blogPostTemplate,
+			component: path.resolve(`src/templates/${String(node.frontmatter.templateKey)}.tsx`),
 			context: {}, // additional data can be passed via context
 		});
 	});
