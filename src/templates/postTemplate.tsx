@@ -9,14 +9,13 @@ import { IFrontmatter } from '../interfaces';
 const useStyles = makeStyles({
 	content: {
 		maxWidth: 1024,
-		margin: '32px auto',
+		margin: '0px auto',
 		padding: 32,
 	},
 	pageTitle: {
 		fontSize: '2.5rem',
-		paddingBottom: 16,
 	},
-}, { name: 'Index' });
+}, { name: 'Post' });
 
 interface IMarkdownRemark {
 	data: {
@@ -27,11 +26,10 @@ interface IMarkdownRemark {
 	};
 }
 
-// data prop will be injected by the GraphQL query below.
-const Template = ({ data }: IMarkdownRemark) => {
+const PostTemplate = ({ data }: IMarkdownRemark) => {
 	const classes = useStyles();
 
-	const { markdownRemark } = data; // data.markdownRemark holds our post data
+	const { markdownRemark } = data;
 	const { frontmatter, html } = markdownRemark;
 	const cleanHTML = DOMPurify.sanitize(html);
 	return (
@@ -51,7 +49,7 @@ const Template = ({ data }: IMarkdownRemark) => {
 	);
 };
 
-export default Template;
+export default PostTemplate;
 
 export const pageQuery = graphql`
 	query($path: String!) {
