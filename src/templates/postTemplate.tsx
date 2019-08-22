@@ -1,21 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+// import { makeStyles } from '@material-ui/styles';
 import DOMPurify from 'dompurify';
 
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
+import useCommonStyles from './commonStyles';
 
-const useStyles = makeStyles({
-	content: {
-		maxWidth: 1024,
-		margin: '0px auto',
-		padding: 32,
-	},
-	pageTitle: {
-		fontSize: '2.5rem',
-	},
-}, { name: 'Post' });
+// const useStyles = makeStyles({
+// 	root: {
+// 	},
+// }, { name: 'Post' });
 
 interface IMarkdownRemark {
 	data: {
@@ -27,16 +22,17 @@ interface IMarkdownRemark {
 }
 
 const PostTemplate = ({ data }: IMarkdownRemark) => {
-	const classes = useStyles();
+	// const classes = useStyles();
+	const commonClasses = useCommonStyles();
 
 	const { markdownRemark } = data;
 	const { frontmatter, html } = markdownRemark;
 	const cleanHTML = DOMPurify.sanitize(html);
 	return (
 		<Layout>
-			<div className={classes.content}>
+			<div className={commonClasses.content}>
 				<div className="blog-post">
-					<h1 className={classes.pageTitle}>{frontmatter.title}</h1>
+					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
 					<h2>{frontmatter.date}</h2>
 					<div
 						className="blog-post-content"

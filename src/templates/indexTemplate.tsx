@@ -1,41 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+// import { makeStyles } from '@material-ui/styles';
 import DOMPurify from 'dompurify';
 
 import Layout from '../components/Layout';
-import jumbotron from '../../static/img/jumbotron.jpg';
 import { IFrontmatter } from '../interfaces';
+import useCommonStyles from './commonStyles';
 
-const useStyles = makeStyles({
-	root: {
-	},
-	content: {
-		maxWidth: 1024,
-		margin: '0px auto',
-		padding: 32,
-	},
-	pageTitle: {
-		fontSize: '2.5rem',
-	},
-	img: {
-		height: 400,
-		backgroundImage: `url(${jumbotron})`,
-		backgroundAttachment: 'fixed',
-		backgroundPosition: 'center',
-		backgroundSize: 'cover',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	imgText: {
-		backgroundColor: 'blueviolet',
-		color: 'white',
-		fontSize: '2.3rem',
-		fontWeight: 600,
-		padding: 24,
-	},
-}, { name: 'Index' });
+// const useStyles = makeStyles({
+// 	root: {
+// 	},
+// }, { name: 'Index' });
 
 interface IMarkdownRemark {
 	data: {
@@ -47,18 +22,19 @@ interface IMarkdownRemark {
 }
 
 const IndexTemplate = ({ data }: IMarkdownRemark) => {
-	const classes = useStyles();
+	// const classes = useStyles();
+	const commonClasses = useCommonStyles();
 
 	const { html, frontmatter } = data.markdownRemark;
 	const cleanHTML = DOMPurify.sanitize(html);
 	return (
 		<Layout>
-			<div className={classes.root}>
-				<div className={classes.img}>
-					<span className={classes.imgText}>{frontmatter.title}</span>
+			<div>
+				<div className={commonClasses.img}>
+					<span className={commonClasses.imgText}>{frontmatter.title}</span>
 				</div>
-				<div className={classes.content}>
-					<h1 className={classes.pageTitle}>{frontmatter.title}</h1>
+				<div className={commonClasses.content}>
+					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
 					{/* eslint-disable-next-line react/no-danger */}
 					<div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
 				</div>
