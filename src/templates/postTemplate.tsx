@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 // import { makeStyles } from '@material-ui/styles';
-import DOMPurify from 'dompurify';
 
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
@@ -27,7 +26,6 @@ const PostTemplate = ({ data }: IMarkdownRemark) => {
 
 	const { markdownRemark } = data;
 	const { frontmatter, html } = markdownRemark;
-	const cleanHTML = DOMPurify.sanitize(html);
 	return (
 		<Layout>
 			<div className={commonClasses.content}>
@@ -37,7 +35,7 @@ const PostTemplate = ({ data }: IMarkdownRemark) => {
 					<div
 						className="blog-post-content"
 						// eslint-disable-next-line react/no-danger
-						dangerouslySetInnerHTML={{ __html: cleanHTML }}
+						dangerouslySetInnerHTML={{ __html: html }}
 					/>
 				</div>
 			</div>

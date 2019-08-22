@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 // import { makeStyles } from '@material-ui/styles';
-import DOMPurify from 'dompurify';
 
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
@@ -26,7 +25,6 @@ const IndexTemplate = ({ data }: IMarkdownRemark) => {
 	const commonClasses = useCommonStyles();
 
 	const { html, frontmatter } = data.markdownRemark;
-	const cleanHTML = DOMPurify.sanitize(html);
 	return (
 		<Layout>
 			<div>
@@ -36,7 +34,7 @@ const IndexTemplate = ({ data }: IMarkdownRemark) => {
 				<div className={commonClasses.content}>
 					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
 					{/* eslint-disable-next-line react/no-danger */}
-					<div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</div>
 			</div>
 		</Layout>
