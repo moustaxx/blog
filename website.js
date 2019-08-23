@@ -7,7 +7,7 @@ module.exports = {
 	siteHeadline: 'Creating websites', // Headline for schema.org JSONLD
 	siteUrl: 'http://localhost', // Domain of your site. No trailing slash!
 	siteLanguage: 'en', // Language tag on <html> element
-	siteLogo: '/img/favicon.ico', // Used for SEO and manifest
+	siteLogo: '/favicon.ico', // Used for SEO and manifest
 	siteDescription: 'Blog build with Netlify CMS and Gatsby',
 	author: 'moustaxx', // Author for schema.org JSONLD
 
