@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
+import PostList from '../components/PostList';
 
 // const useStyles = makeStyles({
 // 	root: {
@@ -35,6 +36,7 @@ const IndexTemplate = ({ data }: IMarkdownRemark) => {
 					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
 					{/* eslint-disable-next-line react/no-danger */}
 					<div dangerouslySetInnerHTML={{ __html: html }} />
+					<PostList />
 				</div>
 			</div>
 		</Layout>
