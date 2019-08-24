@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { graphql, useStaticQuery, Link } from 'gatsby';
+import Img from 'gatsby-image';
+
 import { IFrontmatter } from '../interfaces';
 
 const useStyles = makeStyles({
@@ -14,6 +16,9 @@ const useStyles = makeStyles({
 		margin: 0,
 		paddingBottom: 8,
 	},
+	featuredImg: {
+		margin: '16px 0',
+	},
 }, { name: 'PostList' });
 
 interface IGetPosts {
@@ -23,6 +28,9 @@ interface IGetPosts {
 				id: string;
 				frontmatter: IFrontmatter;
 				excerpt: string;
+				fields: {
+					slug: string;
+				};
 			};
 		}[];
 	};
@@ -34,18 +42,27 @@ const getPosts = graphql`
 			sort: {order: DESC, fields: [frontmatter___date]}, 
 			limit: 1000, 
 			filter: {
-				frontmatter: {path: {regex: "/blog\//"}}
+				frontmatter: {templateKey: {eq: "postTemplate"}}
 			}
 		){
 			edges {
 				node {
 					id
 					frontmatter {
-						path
 						title
 						date(formatString: "DD MMMM YYYY")
+						featuredImage {
+							childImageSharp {
+								fluid(maxWidth: 800) {
+									...GatsbyImageSharpFluid
+								}
+							}
+						}
 					}
 					excerpt(pruneLength: 700)
+					fields {
+						slug
+					}
 				}
 			}
 		}
@@ -59,19 +76,25 @@ const PostList = () => {
 	const { edges } = data.allMarkdownRemark;
 	return (
 		<div>
-			{edges.map(({ node }) => (
-				<div className={classes.post} key={node.id}>
-					<h1>
-						<Link
-							to={node.frontmatter.path}
-							className={classes.title}
-							children={node.frontmatter.title}
-						/>
-					</h1>
-					<h4 className={classes.date}>{node.frontmatter.date}</h4>
-					<div>{node.excerpt}</div>
-				</div>
-			))}
+			{edges.map(({ node }) => {
+				const fluid = node.frontmatter.featuredImage
+					&& node.frontmatter.featuredImage.childImageSharp.fluid;
+
+				return (
+					<article className={classes.post} key={node.id}>
+						<h1>
+							<Link
+								to={node.fields.slug}
+								className={classes.title}
+								children={node.frontmatter.title}
+							/>
+						</h1>
+						<h4 className={classes.date}>{node.frontmatter.date}</h4>
+						<Img fluid={fluid} className={classes.featuredImg} />
+						<div>{node.excerpt}</div>
+					</article>
+				);
+			})}
 		</div>
 	);
 };

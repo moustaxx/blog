@@ -47,7 +47,7 @@ export default IndexTemplate;
 
 export const pageQuery = graphql`
 	query {
-		markdownRemark(frontmatter: { path: { eq: "/" } }) {
+		markdownRemark(fields: { slug: { eq: "/" } }) {
 			html
 			frontmatter {
 				title

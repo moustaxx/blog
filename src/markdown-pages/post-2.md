@@ -1,8 +1,8 @@
 ---
 templateKey: "postTemplate"
-path: "/blog/my-second-post"
 date: "2019-05-04"
 title: "My second blog post"
+featuredImage: ../images/jumbotron.jpg
 ---
 
 In repellendus et provident vel. Amet commodi repudiandae ad voluptas.
