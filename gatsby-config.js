@@ -7,29 +7,6 @@ module.exports = {
 		description: config.siteDescription,
 	},
 	plugins: [
-		'gatsby-plugin-react-helmet',
-		'gatsby-plugin-typescript',
-		'gatsby-plugin-material-ui',
-		{
-			resolve: 'gatsby-plugin-manifest',
-			options: {
-				name: config.siteTitle,
-				short_name: config.siteTitleShort,
-				description: config.siteDescription,
-				start_url: config.pathPrefix,
-				background_color: config.backgroundColor,
-				theme_color: config.themeColor,
-				display: 'standalone',
-				// icons: [] TODO,
-			},
-		},
-		{
-			resolve: 'gatsby-source-filesystem',
-			options: {
-				path: `${__dirname}/static/images`,
-				name: 'uploads',
-			},
-		},
 		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
@@ -47,13 +24,6 @@ module.exports = {
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
 		{
-			resolve: 'gatsby-plugin-typography',
-			options: {
-				pathToConfigModule: 'src/utils/typography',
-				omitGoogleFont: true,
-			},
-		},
-		{
 			resolve: 'gatsby-transformer-remark',
 			options: {
 				plugins: [
@@ -70,6 +40,29 @@ module.exports = {
 						options: { destinationDir: 'static' },
 					},
 				],
+			},
+		},
+		'gatsby-plugin-react-helmet',
+		'gatsby-plugin-typescript',
+		'gatsby-plugin-material-ui',
+		{
+			resolve: 'gatsby-plugin-typography',
+			options: {
+				pathToConfigModule: 'src/utils/typography',
+				omitGoogleFont: true,
+			},
+		},
+		{
+			resolve: 'gatsby-plugin-manifest',
+			options: {
+				name: config.siteTitle,
+				short_name: config.siteTitleShort,
+				description: config.siteDescription,
+				start_url: config.pathPrefix,
+				background_color: config.backgroundColor,
+				theme_color: config.themeColor,
+				display: 'standalone',
+				// icons: [] TODO,
 			},
 		},
 		{
