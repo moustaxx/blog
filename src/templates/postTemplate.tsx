@@ -35,7 +35,7 @@ const PostTemplate = ({ data }: IMarkdownRemark) => {
 				<div className="blog-post">
 					<h2>{frontmatter.date}</h2>
 					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
-					<Img fluid={fluid} className={classes.featuredImg} />
+					{fluid && <Img fluid={fluid} className={classes.featuredImg} />}
 					<div
 						className="blog-post-content"
 						// eslint-disable-next-line react/no-danger

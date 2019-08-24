@@ -90,7 +90,7 @@ const PostList = () => {
 							/>
 						</h1>
 						<h4 className={classes.date}>{node.frontmatter.date}</h4>
-						<Img fluid={fluid} className={classes.featuredImg} />
+						{fluid && <Img fluid={fluid} className={classes.featuredImg} />}
 						<div>{node.excerpt}</div>
 					</article>
 				);
