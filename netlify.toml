@@ -3,4 +3,4 @@
   command = "yarn build"
 [build.environment]
   YARN_VERSION = "1.17.3"
-  YARN_FLAGS = "--production"
+  NODE_ENV = "production"
