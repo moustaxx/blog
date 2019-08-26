@@ -50,7 +50,7 @@ const getPosts = graphql`
 					id
 					frontmatter {
 						title
-						date(formatString: "DD MMMM YYYY")
+						date(formatString: "dddd, DD MMMM YYYY")
 						featuredImage {
 							childImageSharp {
 								fluid(maxWidth: 800) {
