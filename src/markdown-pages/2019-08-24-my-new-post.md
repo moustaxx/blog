@@ -3,7 +3,7 @@ templateKey: postTemplate
 date: 2019-08-24T20:03:36.333Z
 title: My new post
 featuredpost: true
-featuredImage: /uploads/bay-beach-blue-2346015.jpg
+featuredImage: /images/bay-beach-blue-2346015.jpg
 
 tags:
   - lorem

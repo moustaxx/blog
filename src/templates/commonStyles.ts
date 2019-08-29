@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-import jumbotron from '../images/jumbotron.jpg';
+import jumbotron from '../../static/images/jumbotron.jpg';
 
 const useCommonStyles = makeStyles({
 	content: {
