@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
@@ -22,32 +22,65 @@ interface IMarkdownRemark {
 	};
 }
 
-const PostTemplate = ({ data }: IMarkdownRemark) => {
+export interface IPostTemplate {
+	title: string;
+	date?: string;
+	featuredImgFluid?: FluidObject;
+	imageURL?: string;
+	body: string;
+	isPreview?: boolean;
+}
+
+export const PostTemplate = ({
+	title,
+	date,
+	featuredImgFluid,
+	imageURL,
+	body,
+	isPreview,
+}: IPostTemplate) => {
 	const classes = useStyles();
 	const commonClasses = useCommonStyles();
 
-	const { markdownRemark } = data;
-	const { frontmatter, html } = markdownRemark;
-	const fluid = frontmatter.featuredImage && frontmatter.featuredImage.childImageSharp.fluid;
 	return (
-		<Layout>
-			<div className={commonClasses.content}>
-				<div className="blog-post">
-					<h2>{frontmatter.date}</h2>
-					<h1 className={commonClasses.pageTitle}>{frontmatter.title}</h1>
-					{fluid && <Img fluid={fluid} className={classes.featuredImg} />}
-					<div
-						className="blog-post-content"
-						// eslint-disable-next-line react/no-danger
-						dangerouslySetInnerHTML={{ __html: html }}
-					/>
-				</div>
+		<div className={commonClasses.content}>
+			<div className="blog-post">
+				<h2>{!isPreview && date}</h2>
+				<h1 className={commonClasses.pageTitle}>{title}</h1>
+				{featuredImgFluid && !isPreview
+					? <Img fluid={featuredImgFluid} className={classes.featuredImg} />
+					: <img src={imageURL} alt="Featured img" />
+				}
+				{typeof body === 'string'
+					// eslint-disable-next-line react/no-danger
+					? <div dangerouslySetInnerHTML={{ __html: body }} />
+					: <div>{body}</div>
+				}
 			</div>
-		</Layout>
+		</div>
 	);
 };
 
-export default PostTemplate;
+
+const PostPage = ({ data }: IMarkdownRemark) => {
+	const { markdownRemark } = data;
+	const { frontmatter, html } = markdownRemark;
+	const fluid = frontmatter.featuredImage && frontmatter.featuredImage.childImageSharp.fluid;
+
+	return (
+		<Layout>
+			<PostTemplate
+				title={frontmatter.title}
+				date={frontmatter.date}
+				featuredImgFluid={fluid}
+				body={html}
+			/>
+		</Layout>
+
+	);
+};
+
+export default PostPage;
 
 export const pageQuery = graphql`
 	query($slug: String!) {

@@ -7,7 +7,7 @@ public_folder: "/images"
 
 collections:
   - name: "blog"
-    label: "Blog"
+    label: "Post"
     folder: "src/markdown-pages"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -18,3 +18,13 @@ collections:
       - {label: "Featured Image", name: "featuredImage", widget: image}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list"}
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/markdown-pages/index.md"
+        label: "Landing Page"
+        name: "index"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "indexTemplate"}
+          - {label: "Title", name: title, widget: string}
+          - {label: "Body", name: "body", widget: "markdown"}

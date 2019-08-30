@@ -74,9 +74,9 @@ module.exports = {
 		},
 		{
 			resolve: 'gatsby-plugin-netlify-cms',
-			// options: {
-			// 	modulePath: `${__dirname}/src/cms/cms.ts`,
-			// },
+			options: {
+				modulePath: `${__dirname}/src/cms/cms.tsx`,
+			},
 		},
 		'gatsby-plugin-offline',
 		'gatsby-plugin-netlify',
