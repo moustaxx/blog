@@ -6,10 +6,34 @@ import Img, { FluidObject } from 'gatsby-image';
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
+import { author } from '../../website';
 
 const useStyles = makeStyles({
 	featuredImg: {
 		margin: '16px 0',
+	},
+	meta: {
+		display: 'flex',
+	},
+	avatar: {
+		width: 48,
+		height: 48,
+		marginRight: 12,
+		borderRadius: 45,
+		background: '#444446',
+		color: 'white',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	metaCnt: {
+		fontSize: '0.8rem',
+	},
+	metaAuthor: {
+		fontWeight: 700,
+	},
+	metaDate: {
+		color: 'rgba(0, 0, 0, 0.5)',
 	},
 }, { name: 'Post' });
 
@@ -43,10 +67,16 @@ export const PostTemplate = ({
 	const commonClasses = useCommonStyles();
 
 	return (
-		<div className={commonClasses.content}>
+		<article className={commonClasses.content}>
 			<div className="blog-post">
-				<h2>{!isPreview && date}</h2>
 				<h1 className={commonClasses.pageTitle}>{title}</h1>
+				<div className={classes.meta}>
+					<div className={classes.avatar}>{author[0]}</div>
+					<div className={classes.metaCnt}>
+						<div className={classes.metaAuthor}>{author}</div>
+						<div className={classes.metaDate}>{!isPreview && date}</div>
+					</div>
+				</div>
 				{featuredImgFluid && !isPreview
 					? <Img fluid={featuredImgFluid} className={classes.featuredImg} />
 					: <img src={imageURL} alt="Featured img" />
@@ -57,7 +87,7 @@ export const PostTemplate = ({
 					: <div>{body}</div>
 				}
 			</div>
-		</div>
+		</article>
 	);
 };
 
