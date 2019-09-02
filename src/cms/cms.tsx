@@ -18,7 +18,7 @@ CMS.registerPreviewTemplate('pages', ({ entry, widgetFor }) => {
 });
 
 CMS.registerPreviewTemplate('blog', ({ entry, widgetFor, getAsset }) => {
-	const { title } = entry.getIn(['data']).toJS();
+	const { title, date } = entry.getIn(['data']).toJS();
 	const body = widgetFor('body');
 
 	const featuredImage = entry.getIn(['data', 'featuredImage']);
@@ -28,6 +28,7 @@ CMS.registerPreviewTemplate('blog', ({ entry, widgetFor, getAsset }) => {
 		<PreviewTemplate>
 			<PostTemplate
 				title={title}
+				date={date}
 				body={body}
 				imageURL={imageURL}
 				isPreview

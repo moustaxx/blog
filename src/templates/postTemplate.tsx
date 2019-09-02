@@ -48,7 +48,7 @@ interface IMarkdownRemark {
 
 export interface IPostTemplate {
 	title: string;
-	date?: string;
+	date?: Date | string;
 	featuredImgFluid?: FluidObject;
 	imageURL?: string;
 	body: string;
@@ -74,12 +74,14 @@ export const PostTemplate = ({
 					<div className={classes.avatar}>{author[0]}</div>
 					<div className={classes.metaCnt}>
 						<div className={classes.metaAuthor}>{author}</div>
-						<div className={classes.metaDate}>{!isPreview && date}</div>
+						<div className={classes.metaDate}>
+							{date && new Date(date).toLocaleString()}
+						</div>
 					</div>
 				</div>
 				{featuredImgFluid && !isPreview
 					? <Img fluid={featuredImgFluid} className={classes.featuredImg} />
-					: <img src={imageURL} alt="Featured img" />
+					: <img src={imageURL} alt="Featured img" className={classes.featuredImg} />
 				}
 				{typeof body === 'string'
 					// eslint-disable-next-line react/no-danger
@@ -90,7 +92,6 @@ export const PostTemplate = ({
 		</article>
 	);
 };
-
 
 const PostPage = ({ data }: IMarkdownRemark) => {
 	const { markdownRemark } = data;
@@ -117,7 +118,7 @@ export const pageQuery = graphql`
 		markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {
-				date(formatString: "DD MMMM YYYY, h:mm a")
+				date
 				title
 				featuredImage {
 					childImageSharp {

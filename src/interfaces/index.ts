@@ -2,7 +2,7 @@ import { FluidObject } from 'gatsby-image';
 
 export interface IFrontmatter {
 	templateKey: string;
-	date?: string;
+	date?: Date | string;
 	title: string;
 	featuredImage?: {
 		childImageSharp: {
