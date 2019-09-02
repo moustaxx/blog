@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-import jumbotron from '../../static/images/jumbotron.jpg';
+import bg from '../../static/images/daylight-environment-forest.jpg';
 
 const useCommonStyles = makeStyles({
 	content: {
@@ -11,9 +11,8 @@ const useCommonStyles = makeStyles({
 		fontSize: '2.5rem',
 	},
 	img: {
-		height: 400,
-		backgroundImage: `url(${jumbotron})`,
-		backgroundAttachment: 'fixed',
+		height: 512,
+		backgroundImage: `url(${bg})`,
 		backgroundPosition: 'center',
 		backgroundSize: 'cover',
 		display: 'flex',
@@ -21,9 +20,8 @@ const useCommonStyles = makeStyles({
 		justifyContent: 'center',
 	},
 	imgText: {
-		backgroundColor: 'blueviolet',
 		color: 'white',
-		fontSize: '2.3rem',
+		fontSize: '2.8rem',
 		fontWeight: 600,
 		padding: 24,
 	},
