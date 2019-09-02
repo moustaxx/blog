@@ -2,16 +2,17 @@ import React from 'react';
 import CMS from 'netlify-cms-app';
 
 import PreviewTemplate from './previewTemplate';
-import { IndexTemplate } from '../templates/indexTemplate';
+// import { IndexTemplate } from '../templates/indexTemplate';
 import { PostTemplate } from '../templates/postTemplate';
+import { CustomPageTemplate } from '../templates/customPageTemplate';
 
-CMS.registerPreviewTemplate('index', ({ entry, widgetFor }) => {
+CMS.registerPreviewTemplate('pages', ({ entry, widgetFor }) => {
 	const { title } = entry.getIn(['data']).toJS();
 	const body = widgetFor('body');
 
 	return (
 		<PreviewTemplate>
-			<IndexTemplate title={title} body={body} isPreview />
+			<CustomPageTemplate title={title} body={body} isPreview />
 		</PreviewTemplate>
 	);
 });

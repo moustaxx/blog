@@ -20,11 +20,10 @@ collections:
       - {label: "Tags", name: "tags", widget: "list"}
   - name: "pages"
     label: "Pages"
-    files:
-      - file: "src/pages/index.md"
-        label: "Landing Page"
-        name: "index"
-        fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "indexTemplate"}
-          - {label: "Title", name: title, widget: string}
-          - {label: "Body", name: "body", widget: "markdown"}
+    folder: "src/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "customPageTemplate"}
+      - {label: "Title", name: title, widget: string}
+      - {label: "Body", name: "body", widget: "markdown"}
