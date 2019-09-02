@@ -2,6 +2,7 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const kebabCase = require('kebab-case');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
 	const { createPage } = actions;
@@ -15,6 +16,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 				edges {
 					node {
 						frontmatter {
+							tags
 							templateKey
 						}
 						fields {
@@ -31,12 +33,32 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 		return;
 	}
 
-	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+	const posts = result.data.allMarkdownRemark.edges;
+	posts.forEach(({ node }) => {
 		createPage({
 			path: node.fields.slug,
+			tags: node.frontmatter.tags,
 			component: path.resolve(`src/templates/${String(node.frontmatter.templateKey)}.tsx`),
 			context: {
 				slug: node.fields.slug,
+			},
+		});
+	});
+
+	let dirtyTags = [];
+	posts.forEach(({ node }) => {
+		if (node.frontmatter.tags) {
+			dirtyTags = dirtyTags.concat(node.frontmatter.tags);
+		}
+	});
+	const tags = [...new Set(dirtyTags)]; // Eliminate duplicate tags
+	tags.forEach(tag => {
+		const tagPath = `/tags/${kebabCase(tag)}/`;
+		createPage({
+			path: tagPath,
+			component: path.resolve('src/templates/tagsTemplate.tsx'),
+			context: {
+				tag,
 			},
 		});
 	});

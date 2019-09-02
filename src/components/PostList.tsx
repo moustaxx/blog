@@ -1,28 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { graphql, useStaticQuery, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { IFrontmatter } from '../interfaces';
+import PostListItem from './PostListItem';
 
-const useStyles = makeStyles({
-	post: {
-	},
-	title: {
-		color: 'inherit',
-		background: 'none',
-	},
-	date: {
-		margin: 0,
-		paddingBottom: 8,
-	},
-	featuredImg: {
-		margin: '16px 0',
-	},
-}, { name: 'PostList' });
 
-interface IGetPosts {
+export interface IGetPosts {
 	allMarkdownRemark: {
+		totalCount: string;
 		edges: {
 			node: {
 				id: string;
@@ -45,6 +30,7 @@ const getPosts = graphql`
 				frontmatter: {templateKey: {eq: "postTemplate"}}
 			}
 		){
+			totalCount
 			edges {
 				node {
 					id
@@ -70,29 +56,25 @@ const getPosts = graphql`
 `;
 
 const PostList = () => {
-	const classes = useStyles();
 	const data = useStaticQuery<IGetPosts>(getPosts);
 
 	const { edges } = data.allMarkdownRemark;
 	return (
 		<div>
 			{edges.map(({ node }) => {
-				const fluid = node.frontmatter.featuredImage
+				const imgFluid = node.frontmatter.featuredImage
 					&& node.frontmatter.featuredImage.childImageSharp.fluid;
 
 				return (
-					<article className={classes.post} key={node.id}>
-						<h1>
-							<Link
-								to={node.fields.slug}
-								className={classes.title}
-								children={node.frontmatter.title}
-							/>
-						</h1>
-						<h4 className={classes.date}>{node.frontmatter.date}</h4>
-						{fluid && <Img fluid={fluid} className={classes.featuredImg} />}
-						<div>{node.excerpt}</div>
-					</article>
+					<PostListItem
+						key={node.id}
+						id={node.id}
+						slug={node.fields.slug}
+						title={node.frontmatter.title}
+						date={node.frontmatter.date}
+						imgFluid={imgFluid}
+						content={node.excerpt}
+					/>
 				);
 			})}
 		</div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 import Img, { FluidObject } from 'gatsby-image';
+import kebabCase from 'kebab-case';
 
 import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
@@ -35,6 +36,13 @@ const useStyles = makeStyles({
 	metaDate: {
 		color: 'rgba(0, 0, 0, 0.5)',
 	},
+	tagsHeading: {
+		marginTop: 0,
+		marginBottom: 16,
+	},
+	tag: {
+		marginRight: 8,
+	},
 }, { name: 'Post' });
 
 interface IMarkdownRemark {
@@ -48,6 +56,7 @@ interface IMarkdownRemark {
 
 export interface IPostTemplate {
 	title: string;
+	tags?: string[];
 	date?: Date | string;
 	featuredImgFluid?: FluidObject;
 	imageURL?: string;
@@ -57,6 +66,7 @@ export interface IPostTemplate {
 
 export const PostTemplate = ({
 	title,
+	tags,
 	date,
 	featuredImgFluid,
 	imageURL,
@@ -88,6 +98,10 @@ export const PostTemplate = ({
 					? <div dangerouslySetInnerHTML={{ __html: body }} />
 					: <div>{body}</div>
 				}
+				<h3 className={classes.tagsHeading}>Tags</h3>
+				{tags && tags.map(tag => (
+					<Link to={`/tags/${kebabCase(tag)}/`} key={tag} className={classes.tag}>{tag}</Link>
+				))}
 			</div>
 		</article>
 	);
@@ -102,6 +116,7 @@ const PostPage = ({ data }: IMarkdownRemark) => {
 		<Layout>
 			<PostTemplate
 				title={frontmatter.title}
+				tags={frontmatter.tags}
 				date={frontmatter.date}
 				featuredImgFluid={fluid}
 				body={html}
@@ -120,6 +135,7 @@ export const pageQuery = graphql`
 			frontmatter {
 				date
 				title
+				tags
 				featuredImage {
 					childImageSharp {
 						fluid(maxWidth: 800) {
