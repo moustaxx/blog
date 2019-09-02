@@ -1,5 +1,6 @@
 module.exports = {
 	pathPrefix: '/', // Prefix for all links
+	gitAccount: 'https://gitlab.com/moustaxx',
 
 	siteTitle: 'Personal blog', // Navigation and site title
 	siteTitleAlt: 'Personal blog', // Alternative site title for SEO

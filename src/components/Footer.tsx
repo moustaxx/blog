@@ -1,18 +1,26 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import config from '../../website';
 
 const useStyles = makeStyles({
 	root: {
 		width: '100%',
-		padding: '64px 0',
-		backgroundColor: '#2b2523',
+		padding: '32px 0',
+		backgroundColor: 'black',
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
-	},
-	heading: {
-		fontSize: '3rem',
 		color: 'grey',
+	},
+	link: {
+		margin: '0 4px',
+		background: 'none',
+		textShadow: 'none',
+		textDecoration: 'none',
+		color: 'crimson',
+		'&:hover': {
+			textDecoration: 'underline',
+		},
 	},
 }, { name: 'Footer' });
 
@@ -22,7 +30,8 @@ const Footer = () => {
 
 	return (
 		<footer className={classes.root}>
-			<span className={classes.heading}>Footer</span>
+			<div>Created by</div>
+			<a href={config.gitAccount} className={classes.link}>moustaxx</a>
 		</footer>
 	);
 };
