@@ -8,7 +8,7 @@ const useStyles = makeStyles({
 		position: 'absolute',
 		height: 48,
 		top: 0,
-		backgroundColor: '#2b2523',
+		backgroundColor: 'black',
 	},
 	container: {
 		height: '100%',
