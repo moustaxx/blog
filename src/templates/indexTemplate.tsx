@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
 import PostList from '../components/PostList';
+import HeaderImg from '../components/HeaderImg';
 
 // const useStyles = makeStyles({
 // 	root: {
@@ -33,9 +34,7 @@ export const IndexTemplate = ({ title, body, isPreview }: IIndexTemplate) => {
 
 	return (
 		<div>
-			<div className={commonClasses.img}>
-				<span className={commonClasses.imgText}>{title}</span>
-			</div>
+			<HeaderImg title={title} />
 			<div className={commonClasses.content}>
 				<h1 className={commonClasses.pageTitle}>{title}</h1>
 				{typeof body === 'string'
@@ -65,8 +64,8 @@ const IndexPage = ({ data }: IMarkdownRemark) => {
 export default IndexPage;
 
 export const pageQuery = graphql`
-	query {
-		markdownRemark(fields: { slug: { eq: "/" } }) {
+	query($slug: String!) {
+		markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {
 				title

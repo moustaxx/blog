@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import Layout from '../components/Layout';
 import useCommonStyles from '../templates/commonStyles';
+import Layout from '../components/Layout';
 import PostList from '../components/PostList';
+import HeaderImg from '../components/HeaderImg';
 
 const useStyles = makeStyles({
 	content: {
@@ -18,9 +19,7 @@ const BlogPage = () => {
 	return (
 		<Layout>
 			<div>
-				<div className={commonClasses.img}>
-					<span className={commonClasses.imgText}>Latest posts</span>
-				</div>
+				<HeaderImg title="Latest posts" />
 				<div className={`${commonClasses.content} ${classes.content}`}>
 					{/* eslint-disable-next-line react/no-danger */}
 					<PostList />
