@@ -98,10 +98,14 @@ export const PostTemplate = ({
 					? <div dangerouslySetInnerHTML={{ __html: body }} />
 					: <div>{body}</div>
 				}
-				<h3 className={classes.tagsHeading}>Tags</h3>
-				{tags && tags.map(tag => (
-					<Link to={`/tags/${kebabCase(tag)}/`} key={tag} className={classes.tag}>{tag}</Link>
-				))}
+				{tags && tags.length && (
+					<>
+						<h3 className={classes.tagsHeading}>Tags</h3>
+						{tags.map(tag => (
+							<Link to={`/tags/${kebabCase(tag)}/`} key={tag} className={classes.tag}>{tag}</Link>
+						))}
+					</>
+				)}
 			</div>
 		</article>
 	);
