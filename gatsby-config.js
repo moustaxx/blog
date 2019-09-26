@@ -78,6 +78,7 @@ module.exports = {
 				modulePath: `${__dirname}/src/cms/cms.tsx`,
 			},
 		},
+		'gatsby-plugin-extract-schema',
 		'gatsby-plugin-offline',
 		'gatsby-plugin-netlify',
 	],

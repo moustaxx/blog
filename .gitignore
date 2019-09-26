@@ -21,6 +21,9 @@ node_modules/
 .cache/
 public
 
+# GraphQL schema
+schema.json
+
 # System files
 Thumbs.db
 .DS_Store

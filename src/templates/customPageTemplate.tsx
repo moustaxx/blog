@@ -62,7 +62,7 @@ const CustomPage = ({ data }: IMarkdownRemark) => {
 export default CustomPage;
 
 export const pageQuery = graphql`
-	query($slug: String!) {
+	query CustomPageQuery($slug: String!) {
 		markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {

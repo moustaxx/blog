@@ -61,7 +61,7 @@ const IndexPage = ({ data }: IMarkdownRemark) => {
 export default IndexPage;
 
 export const pageQuery = graphql`
-	query($slug: String!) {
+	query IndexPageQuery($slug: String!) {
 		markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {

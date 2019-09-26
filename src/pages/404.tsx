@@ -46,6 +46,7 @@ const Error404 = () => {
 							className={classes.btn}
 							onClick={goBack}
 							onKeyDown={goBack}
+							aria-label="Go back to recent page"
 							type="button"
 							children="Go back"
 						/>
@@ -53,6 +54,7 @@ const Error404 = () => {
 							className={classes.btn}
 							onClick={goHome}
 							onKeyDown={goHome}
+							aria-label="Go to homepage"
 							type="button"
 							children="Go to homepage"
 						/>

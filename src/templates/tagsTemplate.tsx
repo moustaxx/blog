@@ -59,7 +59,7 @@ export const TagsTemplate = ({ data, pageContext }: ITagsTemplate) => {
 export default TagsTemplate;
 
 export const pageQuery = graphql`
-	query($tag: String!) {
+	query TagsPageQuery($tag: String!) {
 		site {
 			siteMetadata {
 				title

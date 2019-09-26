@@ -132,7 +132,7 @@ const PostPage = ({ data }: IMarkdownRemark) => {
 export default PostPage;
 
 export const pageQuery = graphql`
-	query($slug: String!) {
+	query PostPageQuery($slug: String!) {
 		markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {
