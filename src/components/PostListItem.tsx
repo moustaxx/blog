@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 
 const useStyles = makeStyles({
 	post: {
+		margin: '32px 0',
 	},
 	title: {
 		color: 'inherit',

@@ -1,12 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import config from '../../website';
+import { IThemeInterface } from '../utils/theme';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: IThemeInterface) => ({
 	root: {
 		width: '100%',
 		padding: '32px 0',
-		backgroundColor: 'black',
+		backgroundColor: theme.background.topBarAndFooter,
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 			textDecoration: 'underline',
 		},
 	},
-}, { name: 'Footer' });
+}), { name: 'Footer' });
 
 
 const Footer = () => {

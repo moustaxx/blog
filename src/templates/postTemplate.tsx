@@ -8,8 +8,9 @@ import Layout from '../components/Layout';
 import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
 import { author } from '../../website';
+import { IThemeInterface } from '../utils/theme';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: IThemeInterface) => ({
 	featuredImg: {
 		margin: '16px 0',
 	},
@@ -33,17 +34,15 @@ const useStyles = makeStyles({
 	metaAuthor: {
 		fontWeight: 700,
 	},
-	metaDate: {
-		color: 'rgba(0, 0, 0, 0.5)',
-	},
 	tagsHeading: {
 		marginTop: 0,
 		marginBottom: 16,
 	},
 	tag: {
 		marginRight: 8,
+		color: theme.accentColor,
 	},
-}, { name: 'Post' });
+}), { name: 'Post' });
 
 interface IMarkdownRemark {
 	data: {
@@ -78,13 +77,13 @@ export const PostTemplate = ({
 
 	return (
 		<article className={commonClasses.content}>
-			<div className="blog-post">
+			<div>
 				<h1 className={commonClasses.pageTitle}>{title}</h1>
 				<div className={classes.meta}>
 					<div className={classes.avatar}>{author[0]}</div>
 					<div className={classes.metaCnt}>
 						<div className={classes.metaAuthor}>{author}</div>
-						<div className={classes.metaDate}>
+						<div>
 							{date && new Date(date).toLocaleString()}
 						</div>
 					</div>

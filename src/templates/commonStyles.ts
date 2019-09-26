@@ -4,7 +4,7 @@ const useCommonStyles = makeStyles({
 	content: {
 		maxWidth: 1024,
 		margin: '0px auto',
-		padding: 32,
+		padding: '48px 32px',
 	},
 	pageTitle: {
 		fontSize: '2.5rem',
