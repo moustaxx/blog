@@ -18,7 +18,8 @@
 			"typings/*",
 			"src/*",
 			".eslintrc.js",
-			".gitignore"
+			".gitignore",
+			"schema.json"
 		],
 		"delay": "1500"
 	},
