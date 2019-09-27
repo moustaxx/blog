@@ -3,7 +3,10 @@ import React from 'react';
 import { create, Jss } from 'jss';
 import { jssPreset, StylesProvider } from '@material-ui/styles';
 
-import typography from '../utils/typography';
+import { lightTheme } from '../utils/theme';
+import createTypography from '../utils/typography';
+
+const typography = createTypography(lightTheme);
 
 const PreviewTemplate: React.FC = ({ children }) => {
 	const ref = React.useRef<null | HTMLDivElement>(null);
