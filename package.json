@@ -43,6 +43,7 @@
 		"gatsby-source-filesystem": "^2.1.28",
 		"gatsby-transformer-remark": "^2.6.26",
 		"gatsby-transformer-sharp": "^2.2.19",
+		"graphql": "^14.5.8",
 		"kebab-case": "^1.0.0",
 		"netlify-cms-app": "^2.9.7",
 		"react": "^16.8.6",
@@ -51,7 +52,8 @@
 		"react-typography": "^0.16.19",
 		"typeface-roboto": "^0.0.75",
 		"typeface-roboto-slab": "^0.0.72",
-		"typography": "^0.16.19"
+		"typography": "^0.16.19",
+		"urql": "^1.6.1"
 	},
 	"devDependencies": {
 		"@types/dompurify": "^0.0.33",
