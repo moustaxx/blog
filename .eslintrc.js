@@ -47,6 +47,7 @@ module.exports = {
 		'react/jsx-curly-newline': 0,
 		'react/jsx-indent': ['error', 'tab'],
 		'react/jsx-indent-props': ['error', 'tab'],
+		'react/jsx-one-expression-per-line': 0,
 		'react/no-children-prop': 0,
 		'react/prop-types': 0,
 		'react-hooks/rules-of-hooks': 'error',

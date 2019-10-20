@@ -5,6 +5,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import kebabCase from 'kebab-case';
 
 import Layout from '../components/Layout';
+import Comments from '../components/Comments';
 import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
 import { author } from '../../website';
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 	},
 	tag: {
 		marginRight: 8,
+		fontWeight: 500,
 		color: theme.accentColor,
 	},
 }), { name: 'Post' });
@@ -105,6 +107,7 @@ export const PostTemplate = ({
 						))}
 					</>
 				)}
+				{typeof window !== 'undefined' && <Comments />}
 			</div>
 		</article>
 	);
