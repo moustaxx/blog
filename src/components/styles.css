@@ -1,8 +1,8 @@
 #gatsby-noscript {
-	height: 48px;
 	display: flex;
 	align-items: center;
-	padding-left: 16px;
+	padding: 12px;
+	margin: 0;
 	background: red;
 	color: white;
 	vertical-align: middle;
