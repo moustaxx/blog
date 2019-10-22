@@ -62,22 +62,40 @@ const Comment = ({ comment }: { comment: IComment }) => {
 	);
 };
 
-const Comments = () => {
+const CommentWrapper: React.FC = ({ children }) => {
 	const classes = useStyles();
+
+	return (
+		<section id="comments">
+			<h3 className={classes.heading}>Comments</h3>
+			{children}
+		</section>
+	);
+};
+
+const Comments = () => {
 	const postSlug = window.location.pathname.split('/')[2];
 	const [{ data, error, fetching }] = useQuery<IRes>({
 		query: getComments,
 		variables: { postSlug },
 	});
 
+	if (fetching) {
+		return <CommentWrapper>Loading...</CommentWrapper>;
+	}
+	if (error) {
+		return <CommentWrapper>Error: {error.message}</CommentWrapper>;
+	}
+	if (!data || !data.getComments.length) {
+		return <CommentWrapper>Nothing to show...</CommentWrapper>;
+	}
+
 	return (
-		<section id="comments">
-			<h3 className={classes.heading}>Comments</h3>
-			{fetching && <span>Loading...</span>}
-			{error && <span>Error: {error.message}</span>}
-			{(!data || !data.getComments.length) && <span>Nothing to show...</span>}
-			{data && data.getComments.map(comment => <Comment key={comment.id} comment={comment} />)}
-		</section>
+		<CommentWrapper>
+			{data.getComments.map(comment => (
+				<Comment key={comment.id} comment={comment} />
+			))}
+		</CommentWrapper>
 	);
 };
 
