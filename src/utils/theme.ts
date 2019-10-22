@@ -4,6 +4,7 @@ export interface IThemeInterface {
 		primary: string;
 		secondary: string;
 		topBarAndFooter: string;
+		textBox: string;
 	};
 	fontColors: {
 		header: string;
@@ -18,6 +19,7 @@ export const darkTheme: IThemeInterface = {
 		primary: 'hsl(228, 12%, 14%)',
 		secondary: 'hsl(228, 12%, 14%)',
 		topBarAndFooter: 'hsl(228, 10%, 10%)',
+		textBox: 'hsla(0, 0%, 100%, 0.05)',
 	},
 	fontColors: {
 		header: 'hsla(36, 16%, 94%, 0.9)',
@@ -32,6 +34,7 @@ export const lightTheme: IThemeInterface = {
 		primary: 'hsl(0, 0%, 100%)',
 		secondary: 'hsl(210, 19%, 88%)',
 		topBarAndFooter: 'hsl(228, 10%, 10%)',
+		textBox: 'hsla(0, 0%, 0%, 0.05)',
 	},
 	fontColors: {
 		header: 'hsla(0,0%,0%,0.9)',

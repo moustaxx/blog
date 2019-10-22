@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import { IThemeInterface } from '../utils/theme';
 
 const useStyles = makeStyles((theme: IThemeInterface) => ({
@@ -21,6 +21,18 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 	date: {
 		color: 'grey',
 	},
+	input: {
+		width: '100%',
+		margin: '4px 0',
+		padding: 8,
+		border: 0,
+		borderRadius: 4,
+		color: 'inherit',
+		background: theme.background.textBox,
+	},
+	warn: {
+		padding: '0 8px',
+	},
 }), { name: 'Comments' });
 
 interface IComment {
@@ -34,13 +46,24 @@ interface IRes {
 	getComments: IComment[];
 }
 
-const getComments = `
+const GET_COMMENTS = `
 	query getComments($postSlug: String!) {
 		getComments(where: { postSlug: $postSlug }) {
 			id
 			text
 			author
 			createdDate
+		}
+	}
+`;
+
+const ADD_COMMENT = `
+	mutation addComment($text: String!, $postSlug: String!, $author: String!) {
+		addComment(text: $text, postSlug: $postSlug, author: $author) {
+			id
+			text
+			author
+			postSlug
 		}
 	}
 `;
@@ -69,14 +92,49 @@ const CommentWrapper: React.FC = ({ children }) => {
 		<section id="comments">
 			<h3 className={classes.heading}>Comments</h3>
 			{children}
+			<AddComment />
 		</section>
+	);
+};
+
+const AddComment = () => {
+	const classes = useStyles();
+	const [{ error }, executeMutation] = useMutation<IComment>(ADD_COMMENT);
+
+	const postSlug = window.location.pathname.split('/')[2];
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const { currentTarget: target } = event;
+		const author = target.author.value;
+		const text = target.text.value;
+		executeMutation({ author, text, postSlug });
+	};
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<h3 className={classes.heading}>Add comment</h3>
+			<input
+				placeholder="Your nick"
+				type="text"
+				name="author"
+				className={classes.input}
+			/>
+			<textarea
+				placeholder="Enter comment here..."
+				name="text"
+				className={classes.input}
+			/>
+			<button type="submit">Submit</button>
+			{error && <span className={classes.warn}>Error: {error.message}</span>}
+		</form>
 	);
 };
 
 const Comments = () => {
 	const postSlug = window.location.pathname.split('/')[2];
 	const [{ data, error, fetching }] = useQuery<IRes>({
-		query: getComments,
+		query: GET_COMMENTS,
 		variables: { postSlug },
 	});
 

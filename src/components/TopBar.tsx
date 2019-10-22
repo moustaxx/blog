@@ -9,7 +9,7 @@ import SetThemeContext from '../contexts/SetThemeContext';
 const useStyles = makeStyles((theme: IThemeInterface) => ({
 	root: {
 		width: '100%',
-		height: 48,
+		padding: '12px 0',
 		top: 0,
 		backgroundColor: theme.background.topBarAndFooter,
 	},
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 	navBar: {
 		height: '100%',
 		display: 'flex',
+		alignItems: 'center',
 	},
 	link: {
 		textDecoration: 'none',
