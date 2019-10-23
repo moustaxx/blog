@@ -118,11 +118,17 @@ const AddComment = () => {
 				placeholder="Your nick"
 				type="text"
 				name="author"
+				required
+				minLength={3}
+				maxLength={20}
 				className={classes.input}
 			/>
 			<textarea
 				placeholder="Enter comment here..."
 				name="text"
+				required
+				minLength={3}
+				maxLength={250}
 				className={classes.input}
 			/>
 			<button type="submit">Submit</button>
@@ -150,7 +156,7 @@ const Comments = () => {
 
 	return (
 		<CommentWrapper>
-			{data.getComments.map(comment => (
+			{data.getComments.map((comment) => (
 				<Comment key={comment.id} comment={comment} />
 			))}
 		</CommentWrapper>
