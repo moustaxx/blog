@@ -52,7 +52,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 		}
 	});
 	const tags = [...new Set(dirtyTags)]; // Eliminate duplicate tags
-	tags.forEach(tag => {
+	tags.forEach((tag) => {
 		const tagPath = `/tags/${kebabCase(tag)}/`;
 		createPage({
 			path: tagPath,

@@ -102,12 +102,12 @@ export const PostTemplate = ({
 				{tags && tags.length && (
 					<>
 						<h3 className={classes.tagsHeading}>Tags</h3>
-						{tags.map(tag => (
+						{tags.map((tag) => (
 							<Link to={`/tags/${kebabCase(tag)}/`} key={tag} className={classes.tag}>{tag}</Link>
 						))}
 					</>
 				)}
-				{typeof window !== 'undefined' && <Comments />}
+				{typeof window !== 'undefined' && !isPreview && <Comments />}
 			</div>
 		</article>
 	);

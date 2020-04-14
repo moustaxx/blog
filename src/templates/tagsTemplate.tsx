@@ -40,6 +40,7 @@ export const TagsTemplate = ({ data, pageContext }: ITagsTemplate) => {
 
 						return (
 							<PostListItem
+								key={node.id}
 								id={node.id}
 								slug={node.fields.slug}
 								title={node.frontmatter.title}

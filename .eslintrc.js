@@ -36,7 +36,7 @@ module.exports = {
 		'graphql/capitalized-type-name': ['warn', gqlConfig],
 		'graphql/named-operations': ['warn', gqlConfig],
 		'graphql/no-deprecated-fields': ['error', gqlConfig],
-		'graphql/template-strings': ['error', gqlConfig],
+		'graphql/template-strings': 0,
 		'linebreak-style': ['warn', 'windows'],
 		'no-alert': 0,
 		'no-console': 0,

@@ -6,7 +6,17 @@ import PreviewTemplate from './previewTemplate';
 import { PostTemplate } from '../templates/postTemplate';
 import { CustomPageTemplate } from '../templates/customPageTemplate';
 
-CMS.registerPreviewTemplate('pages', ({ entry, widgetFor }) => {
+interface IPreviewComponentProps {
+	entry: {
+		getIn: (name: string[]) => {
+			toJS: () => any;
+		};
+	};
+	getAsset: (name: any) => any;
+	widgetFor: (name: any) => any;
+}
+
+const Pages: React.FC<IPreviewComponentProps> = ({ entry, widgetFor }) => {
 	const { title } = entry.getIn(['data']).toJS();
 	const body = widgetFor('body');
 
@@ -15,9 +25,11 @@ CMS.registerPreviewTemplate('pages', ({ entry, widgetFor }) => {
 			<CustomPageTemplate title={title} body={body} isPreview />
 		</PreviewTemplate>
 	);
-});
+};
+CMS.registerPreviewTemplate('pages', Pages as any);
 
-CMS.registerPreviewTemplate('blog', ({ entry, widgetFor, getAsset }) => {
+
+const Blog: React.FC<IPreviewComponentProps> = ({ entry, widgetFor, getAsset }) => {
 	const { title, date } = entry.getIn(['data']).toJS();
 	const body = widgetFor('body');
 
@@ -35,4 +47,5 @@ CMS.registerPreviewTemplate('blog', ({ entry, widgetFor, getAsset }) => {
 			/>
 		</PreviewTemplate>
 	);
-});
+};
+CMS.registerPreviewTemplate('blog', Blog as any);
