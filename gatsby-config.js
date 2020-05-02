@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const config = require('./website');
 
+require('dotenv').config();
+
 module.exports = {
 	siteMetadata: {
 		title: config.siteTitle,
@@ -73,9 +75,16 @@ module.exports = {
 			},
 		},
 		{
-			resolve: 'gatsby-plugin-netlify-cms',
+			resolve: 'gatsby-source-strapi',
 			options: {
-				modulePath: `${__dirname}/src/cms/cms.tsx`,
+				apiURL: 'https://personal-blogg2.herokuapp.com',
+				queryLimit: 1000,
+				contentTypes: ['articles'],
+				// singleTypes: [''],
+				loginData: {
+					identifier: process.env.STRAPI_USERNAME,
+					password: process.env.STRAPI_PASSWORD,
+				},
 			},
 		},
 		'gatsby-plugin-extract-schema',
