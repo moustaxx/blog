@@ -5,23 +5,11 @@
 	"scripts": {
 		"build": "gatsby build",
 		"develop": "gatsby develop",
-		"start": "nodemon --exec \"gatsby develop\"",
+		"start": "gatsby develop",
 		"serve": "gatsby serve",
 		"clean": "gatsby clean",
 		"lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
 		"lint:fix": "yarn lint --fix"
-	},
-	"nodemonConfig": {
-		"ignore": [
-			".cache/*",
-			"public/*",
-			"typings/*",
-			"src/*",
-			".eslintrc.js",
-			".gitignore",
-			"schema.json"
-		],
-		"delay": "1500"
 	},
 	"dependencies": {
 		"@material-ui/styles": "^4.9.10",
@@ -70,7 +58,6 @@
 		"eslint-plugin-jsx-a11y": "^6.2.3",
 		"eslint-plugin-react": "^7.19.0",
 		"eslint-plugin-react-hooks": "^3.0.0",
-		"nodemon": "^2.0.3",
 		"typescript": "^3.8.3"
 	}
 }
