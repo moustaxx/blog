@@ -1,10 +1,11 @@
 ---
-templateKey: "postTemplate"
-date: "2019-05-04"
-title: "My first blog post"
+templateKey: postTemplate
+date: '2019-05-04'
+title: My first blog post
 featuredImage: /images/building.jpg
+tags:
+  - qwewq
 ---
-
 The SCAA updated the wheel to reflect the finer nuances needed to describe flavors more precisely. The new descriptions are more detailed and hence allow cuppers to distinguish between more flavors.
 
 While this is going to be a big change for professional coffee tasters, it means a lot to you as a consumer as well. We’ll explain how the wheel came to be, how pros use it and what the flavors actually mean.
@@ -21,6 +22,8 @@ The Specialty Coffee Association of America (SCAA), founded in 1982, is a non-pr
 * baristas
 
 For over 30 years, SCAA has been dedicated to creating a vibrant specialty coffee community by recognizing, developing and promoting specialty coffee. SCAA sets and maintains quality standards for the industry, conducts market research, and provides education, training, resources, and business services for its members.
+
+![Some wood](/images/daylight-environment-forest.jpg "Some wood")
 
 Coffee cupping, or coffee tasting, is the practice of observing the tastes and aromas of brewed coffee. It is a professional practice but can be done informally by anyone or by professionals known as "Q Graders". A standard coffee cupping procedure involves deeply sniffing the coffee, then loudly slurping the coffee so it spreads to the back of the tongue.
 
