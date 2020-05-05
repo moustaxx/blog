@@ -24,7 +24,7 @@ interface IPostListItem {
 	id: string;
 	slug: string;
 	title: string;
-	date?: Date | string;
+	date: Date | string;
 	imgFluid?: FluidObject;
 	content: string;
 }

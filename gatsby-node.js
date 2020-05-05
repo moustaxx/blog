@@ -1,27 +1,29 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const kebabCase = require('kebab-case');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
 	const { createPage } = actions;
 
 	const result = await graphql(`
-		query getMarkdownPages {
-			allMarkdownRemark(
-			sort: { order: DESC, fields: [frontmatter___date] }
-			limit: 1000
+		query getAllStrapiArticles {
+			allStrapiArticles(
+				sort: {order: DESC, fields: [created_at]},
+				limit: 1000,
 			) {
 				edges {
 					node {
-						frontmatter {
-							tags
-							templateKey
+						tags {
+							name
 						}
-						fields {
-							slug
-						}
+						slug
+					}
+				}
+			}
+			allStrapiCustomPages {
+				edges {
+					node {
+						slug
 					}
 				}
 			}
@@ -33,22 +35,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 		return;
 	}
 
-	const posts = result.data.allMarkdownRemark.edges;
+	const posts = result.data.allStrapiArticles.edges;
+	const customPages = result.data.allStrapiCustomPages.edges;
+
 	posts.forEach(({ node }) => {
 		createPage({
-			path: node.fields.slug,
-			tags: node.frontmatter.tags,
-			component: path.resolve(`src/templates/${String(node.frontmatter.templateKey)}.tsx`),
+			path: node.slug,
+			tags: node.tags,
+			component: path.resolve('src/templates/postTemplate.tsx'),
 			context: {
-				slug: node.fields.slug,
+				slug: node.slug,
 			},
 		});
 	});
 
 	let dirtyTags = [];
 	posts.forEach(({ node }) => {
-		if (node.frontmatter.tags) {
-			dirtyTags = dirtyTags.concat(node.frontmatter.tags);
+		if (node.tags.length) {
+			node.tags.forEach(({ name }) => {
+				dirtyTags = [...dirtyTags, name];
+			});
 		}
 	});
 	const tags = [...new Set(dirtyTags)]; // Eliminate duplicate tags
@@ -62,26 +68,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 			},
 		});
 	});
-};
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-	const { createNodeField } = actions;
-	fmImagesToRelative(node);
-
-	if (node.internal.type === 'MarkdownRemark') {
-		const value = createFilePath({ node, getNode });
-		if (node.frontmatter && node.frontmatter.templateKey === 'postTemplate') {
-			createNodeField({
-				name: 'slug',
-				node,
-				value: `/blog${value}`,
-			});
-		} else {
-			createNodeField({
-				name: 'slug',
-				node,
-				value,
-			});
-		}
-	}
+	customPages.forEach(({ node }) => {
+		let template = 'customPageTemplate';
+		if (node.slug === '/') template = 'indexTemplate';
+		createPage({
+			path: node.slug,
+			component: path.resolve(`src/templates/${template}.tsx`),
+			context: {
+				slug: node.slug,
+			},
+		});
+	});
 };

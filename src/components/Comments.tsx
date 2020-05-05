@@ -101,7 +101,7 @@ const AddComment = () => {
 	const classes = useStyles();
 	const [{ error }, executeMutation] = useMutation<IComment>(ADD_COMMENT);
 
-	const postSlug = window.location.pathname.split('/')[2];
+	const postSlug = window.location.pathname.split('/')[1];
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -138,7 +138,7 @@ const AddComment = () => {
 };
 
 const Comments = () => {
-	const postSlug = window.location.pathname.split('/')[2];
+	const postSlug = window.location.pathname.split('/')[1];
 	const [{ data, error, fetching }] = useQuery<IRes>({
 		query: GET_COMMENTS,
 		variables: { postSlug },

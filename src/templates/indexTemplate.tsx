@@ -1,35 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-// import { makeStyles } from '@material-ui/styles';
 
-import Layout from '../components/Layout';
-import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
-import PostList from '../components/PostList';
+import Layout from '../components/Layout';
 import HeaderImg from '../components/HeaderImg';
+import PostList from '../components/PostList';
+import { IStrapiCustomPage, ICustomPageTemplate } from '../interfaces';
 
-// const useStyles = makeStyles({
-// 	root: {
-// 	},
-// }, { name: 'Index' });
-
-interface IMarkdownRemark {
-	data: {
-		markdownRemark: {
-			html: string;
-			frontmatter: IFrontmatter;
-		};
-	};
-}
-
-export interface IIndexTemplate {
-	title: string;
-	body: string;
-	isPreview?: boolean;
-}
-
-export const IndexTemplate = ({ title, body }: IIndexTemplate) => {
-	// const classes = useStyles();
+export const IndexTemplate = ({ title, body }: ICustomPageTemplate) => {
 	const commonClasses = useCommonStyles();
 
 	return (
@@ -37,22 +15,21 @@ export const IndexTemplate = ({ title, body }: IIndexTemplate) => {
 			<HeaderImg title={title} />
 			<div className={commonClasses.content}>
 				<h1 className={commonClasses.pageTitle}>{title}</h1>
-				{ /* eslint-disable-next-line react/no-danger */ }
-				<div dangerouslySetInnerHTML={{ __html: body }} />
+				<div>{body}</div>
 				<PostList />
 			</div>
 		</div>
 	);
 };
 
-const IndexPage = ({ data }: IMarkdownRemark) => {
-	const { html, frontmatter } = data.markdownRemark;
+const IndexPage = ({ data }: IStrapiCustomPage) => {
+	const { title, content } = data.strapiCustomPages;
 
 	return (
 		<Layout>
 			<IndexTemplate
-				title={frontmatter.title}
-				body={html}
+				title={title}
+				body={content}
 			/>
 		</Layout>
 	);
@@ -62,11 +39,9 @@ export default IndexPage;
 
 export const pageQuery = graphql`
 	query IndexPageQuery($slug: String!) {
-		markdownRemark(fields: { slug: { eq: $slug } }) {
-			html
-			frontmatter {
-				title
-			}
+		strapiCustomPages(slug: { eq: $slug }) {
+			title
+			content
 		}
 	}
 `;

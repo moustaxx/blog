@@ -6,10 +6,10 @@ import kebabCase from 'kebab-case';
 
 import Layout from '../components/Layout';
 import Comments from '../components/Comments';
-import { IFrontmatter } from '../interfaces';
 import useCommonStyles from './commonStyles';
 import { author } from '../../website';
 import { IThemeInterface } from '../utils/theme';
+import { TStrapiArticle } from '../interfaces';
 
 const useStyles = makeStyles((theme: IThemeInterface) => ({
 	featuredImg: {
@@ -46,23 +46,20 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 	},
 }), { name: 'Post' });
 
-interface IMarkdownRemark {
+interface IStrapiArticle {
 	data: {
-		markdownRemark: {
-			html: string;
-			frontmatter: IFrontmatter;
-		};
+		strapiArticles: TStrapiArticle;
 	};
 }
 
-export interface IPostTemplate {
+interface IPostTemplate {
 	title: string;
-	tags?: string[];
+	tags: {
+		name: string;
+	}[];
 	date?: Date | string;
 	featuredImgFluid?: FluidObject;
-	imageURL?: string;
-	body: string;
-	isPreview?: boolean;
+	content: string;
 }
 
 export const PostTemplate = ({
@@ -70,9 +67,7 @@ export const PostTemplate = ({
 	tags,
 	date,
 	featuredImgFluid,
-	imageURL,
-	body,
-	isPreview,
+	content,
 }: IPostTemplate) => {
 	const classes = useStyles();
 	const commonClasses = useCommonStyles();
@@ -90,42 +85,39 @@ export const PostTemplate = ({
 						</div>
 					</div>
 				</div>
-				{featuredImgFluid && !isPreview
-					? <Img fluid={featuredImgFluid} className={classes.featuredImg} />
-					: <img src={imageURL} alt="Featured img" className={classes.featuredImg} />
-				}
-				{typeof body === 'string'
-					// eslint-disable-next-line react/no-danger
-					? <div dangerouslySetInnerHTML={{ __html: body }} />
-					: <div>{body}</div>
-				}
-				{tags && tags.length && (
+				{featuredImgFluid && <Img fluid={featuredImgFluid} className={classes.featuredImg} />}
+				<div>{content}</div>
+				{tags.length && (
 					<>
 						<h3 className={classes.tagsHeading}>Tags</h3>
-						{tags.map((tag) => (
-							<Link to={`/tags/${kebabCase(tag)}/`} key={tag} className={classes.tag}>{tag}</Link>
+						{tags.map(({ name: tagName }) => (
+							<Link
+								to={`/tags/${kebabCase(tagName)}/`}
+								key={tagName}
+								className={classes.tag}
+								children={tagName}
+							/>
 						))}
 					</>
 				)}
-				{typeof window !== 'undefined' && !isPreview && <Comments />}
+				{typeof window !== 'undefined' && <Comments />}
 			</div>
 		</article>
 	);
 };
 
-const PostPage = ({ data }: IMarkdownRemark) => {
-	const { markdownRemark } = data;
-	const { frontmatter, html } = markdownRemark;
-	const fluid = frontmatter.featuredImage && frontmatter.featuredImage.childImageSharp.fluid;
+const PostPage = ({ data }: IStrapiArticle) => {
+	const { strapiArticles } = data;
+	const fluid = strapiArticles.image && strapiArticles.image.childImageSharp.fluid;
 
 	return (
 		<Layout>
 			<PostTemplate
-				title={frontmatter.title}
-				tags={frontmatter.tags}
-				date={frontmatter.date}
+				title={strapiArticles.title}
+				tags={strapiArticles.tags}
+				date={strapiArticles.created_at}
 				featuredImgFluid={fluid}
-				body={html}
+				content={strapiArticles.content}
 			/>
 		</Layout>
 
@@ -133,20 +125,19 @@ const PostPage = ({ data }: IMarkdownRemark) => {
 };
 
 export default PostPage;
-
 export const pageQuery = graphql`
 	query PostPageQuery($slug: String!) {
-		markdownRemark(fields: { slug: { eq: $slug } }) {
-			html
-			frontmatter {
-				date
-				title
-				tags
-				featuredImage {
-					childImageSharp {
-						fluid(maxWidth: 800) {
-							...GatsbyImageSharpFluid
-						}
+		strapiArticles(slug: { eq: $slug }) {
+			created_at
+			title
+			content
+			tags {
+				name
+			}
+			image {
+				childImageSharp {
+					fluid(maxWidth: 800) {
+						...GatsbyImageSharpFluid
 					}
 				}
 			}

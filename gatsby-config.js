@@ -79,7 +79,7 @@ module.exports = {
 			options: {
 				apiURL: 'https://personal-blogg2.herokuapp.com',
 				queryLimit: 1000,
-				contentTypes: ['articles'],
+				contentTypes: ['articles', 'custom-pages'],
 				// singleTypes: [''],
 				loginData: {
 					identifier: process.env.STRAPI_USERNAME,
