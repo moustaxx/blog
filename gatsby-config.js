@@ -16,48 +16,8 @@ module.exports = {
 				name: 'uploads',
 			},
 		},
-		// {
-		// 	resolve: 'gatsby-source-filesystem',
-		// 	options: {
-		// 		path: `${__dirname}/src/images`,
-		// 		name: 'images',
-		// 	},
-		// },
-		{
-			resolve: 'gatsby-source-filesystem',
-			options: {
-				path: `${__dirname}/src/articles`,
-				name: 'articles',
-			},
-		},
-		{
-			resolve: 'gatsby-source-filesystem',
-			options: {
-				path: `${__dirname}/src/pages`,
-				name: 'pages',
-			},
-		},
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
-		{
-			resolve: 'gatsby-transformer-remark',
-			options: {
-				plugins: [
-					{
-						resolve: 'gatsby-remark-relative-images',
-						options: { name: 'uploads' },
-					},
-					{
-						resolve: 'gatsby-remark-images',
-						options: { maxWidth: 2048 },
-					},
-					{
-						resolve: 'gatsby-remark-copy-linked-files',
-						options: { destinationDir: 'static' },
-					},
-				],
-			},
-		},
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-typescript',
 		'gatsby-plugin-material-ui',
