@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { graphql } from 'gatsby';
 
 import useCommonStyles from './commonStyles';
@@ -14,7 +15,7 @@ export const CustomPageTemplate = ({ title, body }: ICustomPageTemplate) => {
 			<HeaderImg title={title} />
 			<div className={commonClasses.content}>
 				<h1 className={commonClasses.pageTitle}>{title}</h1>
-				<div>{body}</div>
+				<ReactMarkdown source={body} />
 			</div>
 		</div>
 	);

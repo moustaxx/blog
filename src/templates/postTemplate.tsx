@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { graphql, Link } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 import Img, { FluidObject } from 'gatsby-image';
@@ -86,7 +87,7 @@ export const PostTemplate = ({
 					</div>
 				</div>
 				{featuredImgFluid && <Img fluid={featuredImgFluid} className={classes.featuredImg} />}
-				<div>{content}</div>
+				<ReactMarkdown source={content} />
 				{tags.length && (
 					<>
 						<h3 className={classes.tagsHeading}>Tags</h3>

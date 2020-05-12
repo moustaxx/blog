@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { makeStyles } from '@material-ui/styles';
 import Img, { FluidObject } from 'gatsby-image';
 import { Link } from 'gatsby';
@@ -42,7 +43,7 @@ const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListIte
 			</h1>
 			<h4 className={classes.date}>{date}</h4>
 			{imgFluid && <Img fluid={imgFluid} className={classes.featuredImg} />}
-			<div>{content}</div>
+			<ReactMarkdown source={content} />
 		</article>
 	);
 };
