@@ -30,6 +30,13 @@ interface IPostListItem {
 	content: string;
 }
 
+const sliceText = (text: string) => {
+	const paragraphs = text.split('\n');
+	if (text.length > 700) return `${paragraphs[0].slice(0, 700)}...`;
+	if (paragraphs.length > 1) return `${paragraphs[0]}...`;
+	return text;
+};
+
 const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListItem) => {
 	const classes = useStyles();
 	return (
@@ -43,7 +50,7 @@ const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListIte
 			</h1>
 			<h4 className={classes.date}>{date}</h4>
 			{imgFluid && <Img fluid={imgFluid} className={classes.featuredImg} />}
-			<ReactMarkdown source={content} />
+			<ReactMarkdown source={sliceText(content)} />
 		</article>
 	);
 };
