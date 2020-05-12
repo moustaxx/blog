@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import { TypographyStyle } from 'react-typography';
 
-import './styles.css';
+import '../styles.css';
 import 'typeface-roboto';
 import 'typeface-roboto-slab';
 import config from '../../website';
