@@ -14,7 +14,6 @@ module.exports = {
 	},
 	extends: [
 		'eslint-config-airbnb-typescript',
-		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/recommended',
 	],
 	parserOptions: {
@@ -26,12 +25,12 @@ module.exports = {
 	plugins: ['react-hooks', 'graphql'],
 	rules: {
 		'@typescript-eslint/array-type': 0,
-		'@typescript-eslint/explicit-function-return-type': 0,
+		'@typescript-eslint/explicit-module-boundary-types': 0,
 		'@typescript-eslint/no-explicit-any': 0,
 		'@typescript-eslint/no-non-null-assertion': 0,
 		'@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
 		'@typescript-eslint/indent': ['warn', 'tab', { SwitchCase: 1 }],
-		'@typescript-eslint/interface-name-prefix': ['error', 'always'],
+		'@typescript-eslint/camelcase': 0,
 		'arrow-body-style': 0,
 		'graphql/capitalized-type-name': ['warn', gqlConfig],
 		'graphql/named-operations': ['warn', gqlConfig],
