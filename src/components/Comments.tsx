@@ -69,6 +69,13 @@ const ADD_COMMENT = `
 	}
 `;
 
+const getSlug = () => {
+	const pathname = window.location.pathname.split('/');
+	return (pathname[1] === 'pl' || pathname[1] === 'en')
+		? pathname[2]
+		: pathname[1];
+};
+
 const Comment = ({ comment }: { comment: IComment }) => {
 	const classes = useStyles();
 	const date = new Date(comment.createdDate).toLocaleString();
@@ -104,7 +111,7 @@ const AddComment = () => {
 	const { t } = useTranslation();
 	const [{ error }, executeMutation] = useMutation<IComment>(ADD_COMMENT);
 
-	const postSlug = window.location.pathname.split('/')[1];
+	const postSlug = getSlug();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -142,7 +149,8 @@ const AddComment = () => {
 
 const Comments = () => {
 	const { t } = useTranslation();
-	const postSlug = window.location.pathname.split('/')[1];
+	const postSlug = getSlug();
+
 	const [{ data, error, fetching }] = useQuery<IRes>({
 		query: GET_COMMENTS,
 		variables: { postSlug },
