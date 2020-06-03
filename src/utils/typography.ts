@@ -5,8 +5,8 @@ const createTypography = (theme: IThemeInterface) => {
 	return new Typography({
 		baseFontSize: '19px',
 		baseLineHeight: 1.58,
-		headerFontFamily: ['Roboto Slab', 'sans-serif'],
-		bodyFontFamily: ['Roboto', 'serif'],
+		headerFontFamily: ['Roboto Slab', 'serif'],
+		bodyFontFamily: ['Roboto', 'sans-serif'],
 		headerColor: theme.fontColors.header,
 		bodyColor: theme.fontColors.body,
 		headerWeight: 700,
