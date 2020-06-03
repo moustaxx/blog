@@ -91,7 +91,7 @@ export const PostTemplate = ({
 				</div>
 				{featuredImgFluid && <Img fluid={featuredImgFluid} className={classes.featuredImg} />}
 				<ReactMarkdown source={content} />
-				{tags.length && (
+				{!!tags.length && (
 					<>
 						<h3 className={classes.tagsHeading}>{t('tags')}</h3>
 						{tags.map(({ name: tagName }) => (
