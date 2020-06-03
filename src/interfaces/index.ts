@@ -5,6 +5,8 @@ export interface IStrapiCustomPage {
 		strapiCustomPages: {
 			title: string;
 			content: string;
+			title_pl?: string;
+			content_pl?: string;
 		};
 	};
 }
@@ -12,6 +14,8 @@ export interface IStrapiCustomPage {
 export interface ICustomPageTemplate {
 	title: string;
 	body: string;
+	title_pl?: string;
+	content_pl?: string;
 }
 
 export type TStrapiArticle = {

@@ -6,6 +6,7 @@ import useCommonStyles from './commonStyles';
 import Layout from '../components/Layout';
 import HeaderImg from '../components/HeaderImg';
 import { ICustomPageTemplate, IStrapiCustomPage } from '../interfaces';
+import { useI18next } from '../utils/useI18next';
 
 export const CustomPageTemplate = ({ title, body }: ICustomPageTemplate) => {
 	const commonClasses = useCommonStyles();
@@ -22,13 +23,17 @@ export const CustomPageTemplate = ({ title, body }: ICustomPageTemplate) => {
 };
 
 const CustomPage = ({ data }: IStrapiCustomPage) => {
-	const { title, content } = data.strapiCustomPages;
+	const { title, content, title_pl, content_pl } = data.strapiCustomPages;
+	const { i18n } = useI18next();
+
+	const translatedTitle = i18n.language === 'pl' && title_pl ? title_pl : title;
+	const translatedContent = i18n.language === 'pl' && content_pl ? content_pl : content;
 
 	return (
 		<Layout>
 			<CustomPageTemplate
-				title={title}
-				body={content}
+				title={translatedTitle}
+				body={translatedContent}
 			/>
 		</Layout>
 	);
@@ -41,6 +46,8 @@ export const pageQuery = graphql`
 		strapiCustomPages(slug: { eq: $slug }) {
 			title
 			content
+			title_pl
+			content_pl
 		}
 	}
 `;

@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import HeaderImg from '../components/HeaderImg';
 import PostList from '../components/PostList';
 import { IStrapiCustomPage, ICustomPageTemplate } from '../interfaces';
+import { useI18next } from '../utils/useI18next';
 
 export const IndexTemplate = ({ title, body }: ICustomPageTemplate) => {
 	const commonClasses = useCommonStyles();
@@ -24,13 +25,17 @@ export const IndexTemplate = ({ title, body }: ICustomPageTemplate) => {
 };
 
 const IndexPage = ({ data }: IStrapiCustomPage) => {
-	const { title, content } = data.strapiCustomPages;
+	const { title, content, title_pl, content_pl } = data.strapiCustomPages;
+	const { i18n } = useI18next();
+
+	const translatedTitle = i18n.language === 'pl' && title_pl ? title_pl : title;
+	const translatedContent = i18n.language === 'pl' && content_pl ? content_pl : content;
 
 	return (
 		<Layout>
 			<IndexTemplate
-				title={title}
-				body={content}
+				title={translatedTitle}
+				body={translatedContent}
 			/>
 		</Layout>
 	);
@@ -43,6 +48,8 @@ export const pageQuery = graphql`
 		strapiCustomPages(slug: { eq: $slug }) {
 			title
 			content
+			title_pl
+			content_pl
 		}
 	}
 `;
