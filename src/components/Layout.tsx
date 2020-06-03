@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import { TypographyStyle } from 'react-typography';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import '../styles.css';
 import 'typeface-roboto';
@@ -32,11 +33,12 @@ const Layout: React.FC = ({ children }) => {
 		}
 	};
 	const typography = createTypography(theme);
+	const { t } = useTranslation();
 
 	return (
 		<ThemeProvider theme={theme}>
 			<SetThemeContext.Provider value={setNewTheme}>
-				<Helmet title={config.siteTitle}>
+				<Helmet title={t('title')}>
 					<link rel="icon" type="image/png" sizes="32x32" href={config.siteLogo} />
 					<meta name="description" content={config.siteDescription} />
 					<meta property="og:url" content={config.siteUrl} />

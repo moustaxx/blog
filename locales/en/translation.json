@@ -1,0 +1,22 @@
+{
+	"title": "Personal blog",
+	"blog": "Blog",
+	"about": "About",
+	"footer": "Created by",
+	"comments": "Comments",
+	"addComment": "Add comment",
+	"commentNickPlaceholder": "Your nick",
+	"commentContentPlaceholder": "Type your comment here...",
+	"submit": "Submit",
+	"loading": "Loading...",
+	"error": "Error",
+	"nothingToShow": "Nothing to show",
+	"pageNotFound": "Page not found",
+	"goBackToRecentPage": "Go back to recent page",
+	"goBack": "Go back",
+	"goToHomePage": "Go to homepage",
+	"latestPosts": "Latest posts",
+	"found": "Found",
+	"foundArticles": "articles",
+	"tags": "Tags"
+}

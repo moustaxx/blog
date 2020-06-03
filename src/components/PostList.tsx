@@ -15,7 +15,7 @@ const getPosts = graphql`
 					content
 					id
 					title
-					created_at(formatString: "dddd, DD MMMM YYYY")
+					created_at
 					slug
 					author {
 						username

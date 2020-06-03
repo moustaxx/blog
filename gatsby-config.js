@@ -48,6 +48,24 @@ module.exports = {
 			},
 		},
 		'gatsby-plugin-extract-schema',
+		{
+			resolve: 'gatsby-plugin-react-i18next',
+			options: {
+				path: `${__dirname}/locales`,
+				languages: ['en', 'pl'],
+				defaultLanguage: 'en',
+
+				// you can pass any i18next options
+				// pass following options to allow message content as a key
+				i18nextOptions: {
+					interpolation: {
+						escapeValue: false, // not needed for react as it escapes by default
+					},
+					whitelist: ['pl', 'en'],
+					nonExplicitWhitelist: true,
+				},
+			},
+		},
 		'gatsby-plugin-offline',
 		'gatsby-plugin-netlify',
 	],

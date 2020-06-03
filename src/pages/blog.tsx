@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import useCommonStyles from '../templates/commonStyles';
 import Layout from '../components/Layout';
@@ -13,11 +14,12 @@ import HeaderImg from '../components/HeaderImg';
 const BlogPage = () => {
 	// const classes = useStyles();
 	const commonClasses = useCommonStyles();
+	const { t } = useTranslation();
 
 	return (
 		<Layout>
 			<div>
-				<HeaderImg title="Latest posts" />
+				<HeaderImg title={t('latestPosts')} />
 				<div className={commonClasses.content}>
 					<PostList />
 				</div>

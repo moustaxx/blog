@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
+
 import config from '../../website';
 import { IThemeInterface } from '../utils/theme';
 
@@ -28,10 +30,11 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 
 const Footer = () => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 
 	return (
 		<footer className={classes.root}>
-			<div>Created by</div>
+			<div>{t('footer')}</div>
 			<a href={config.gitAccount} className={classes.link}>moustaxx</a>
 		</footer>
 	);

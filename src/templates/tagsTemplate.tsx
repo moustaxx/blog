@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { graphql } from 'gatsby';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import useCommonStyles from './commonStyles';
 import { IGetPosts } from '../interfaces';
@@ -17,13 +18,14 @@ interface ITagsTemplate {
 export const TagsTemplate = ({ data, pageContext }: ITagsTemplate) => {
 	const commonClasses = useCommonStyles();
 	const { edges } = data.allStrapiArticles;
+	const { t } = useTranslation();
 
 	return (
 		<Layout>
 			<div>
 				<div className={commonClasses.content}>
 					<h1 className={commonClasses.pageTitle}>#{pageContext.tag}</h1>
-					<h4>Found {data.allStrapiArticles.totalCount} articles</h4>
+					<h4>{t('found')} {data.allStrapiArticles.totalCount} {t('foundArticles')}</h4>
 					{edges.map(({ node }) => {
 						const imgFluid = node.image
 							&& node.image.childImageSharp.fluid;
@@ -62,7 +64,7 @@ export const pageQuery = graphql`
 					id
 					title
 					content
-					created_at(formatString: "dddd, DD MMMM YYYY")
+					created_at
 					slug
 					image {
 						childImageSharp {

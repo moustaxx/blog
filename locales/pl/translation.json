@@ -1,0 +1,22 @@
+{
+	"title": "Blog osobisty",
+	"blog": "Blog",
+	"about": "O mnie",
+	"footer": "Strona stworzona przez",
+	"comments": "Komentarze",
+	"addComment": "Dodaj komentarz",
+	"commentNickPlaceholder": "Twój nick",
+	"commentContentPlaceholder": "Wpisz treść komentarza...",
+	"submit": "Wyślij",
+	"loading": "Ładowanie...",
+	"error": "Błąd",
+	"nothingToShow": "Nic tu nie ma",
+	"pageNotFound": "Nie odnaleziono strony",
+	"goBackToRecentPage": "Powróć do poprzedniej strony",
+	"goBack": "Powrót",
+	"goToHomePage": "Idź do strony głównej",
+	"latestPosts": "Najnowsze posty",
+	"found": "Znaleziono",
+	"foundArticles": "artykułów",
+	"tags": "Tagi"
+}

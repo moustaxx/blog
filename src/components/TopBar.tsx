@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next';
 import { makeStyles } from '@material-ui/styles';
 
 import { BulbIcon } from './Icons';
+import { useI18next } from '../utils/useI18next';
 import { IThemeInterface } from '../utils/theme';
 import SetThemeContext from '../contexts/SetThemeContext';
 
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 		cursor: 'pointer',
 		outline: 'none',
 		border: 'none',
+		background: 'inherit',
 		fill: 'white',
 		'&:hover': {
 			color: theme.accentColor,
@@ -63,17 +65,36 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 		width: '1.3rem',
 		height: '100%',
 	},
+	localesDiv: {
+		padding: '0 12px',
+	},
+	localeBtn: {
+		color: 'white',
+		background: 'inherit',
+		transitionDuration: '.4s',
+		transitionProperty: 'color',
+		font: 'inherit',
+		border: 0,
+		padding: 0,
+		outline: 0,
+		margin: 0,
+		'&:hover': {
+			color: theme.accentColor,
+		},
+	},
 }), { name: 'TopBar' });
 
 const TopBar = () => {
 	const classes = useStyles();
 	const changeTheme = React.useContext(SetThemeContext);
 	const linkClass = `${classes.link} ${classes.navElement}`;
+	const { t } = useTranslation();
+	const { changeLanguage } = useI18next();
 
 	return (
 		<div className={classes.root}>
 			<div className={classes.container}>
-				<Link className={`${classes.link} ${classes.title}`} to="/">Personal Blog</Link>
+				<Link className={`${classes.link} ${classes.title}`} to="/">{t('title')}</Link>
 				<nav className={classes.navBar}>
 					<button
 						className={`${classes.link} ${classes.navElement}`}
@@ -82,8 +103,23 @@ const TopBar = () => {
 					>
 						<BulbIcon className={classes.icon} />
 					</button>
-					<Link className={linkClass} to="/blog">Blog</Link>
-					<Link className={linkClass} to="/about">About</Link>
+					<Link className={linkClass} to="/blog">{t('blog')}</Link>
+					<Link className={linkClass} to="/about">{t('about')}</Link>
+					<div className={classes.localesDiv}>
+						<button
+							onClick={() => changeLanguage('en')}
+							className={classes.localeBtn}
+							type="button"
+						>EN
+						</button>
+						<span style={{ color: 'white' }}>/</span>
+						<button
+							onClick={() => changeLanguage('pl')}
+							className={classes.localeBtn}
+							type="button"
+						>PL
+						</button>
+					</div>
 				</nav>
 			</div>
 		</div>

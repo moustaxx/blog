@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useQuery, useMutation } from 'urql';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { IThemeInterface } from '../utils/theme';
 
 const useStyles = makeStyles((theme: IThemeInterface) => ({
@@ -87,10 +88,11 @@ const Comment = ({ comment }: { comment: IComment }) => {
 
 const CommentWrapper: React.FC = ({ children }) => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 
 	return (
 		<section id="comments">
-			<h3 className={classes.heading}>Comments</h3>
+			<h3 className={classes.heading}>{t('comments')}</h3>
 			{children}
 			<AddComment />
 		</section>
@@ -99,6 +101,7 @@ const CommentWrapper: React.FC = ({ children }) => {
 
 const AddComment = () => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 	const [{ error }, executeMutation] = useMutation<IComment>(ADD_COMMENT);
 
 	const postSlug = window.location.pathname.split('/')[1];
@@ -113,9 +116,9 @@ const AddComment = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3 className={classes.heading}>Add comment</h3>
+			<h3 className={classes.heading}>{t('addComment')}</h3>
 			<input
-				placeholder="Your nick"
+				placeholder={t('commentNickPlaceholder')}
 				type="text"
 				name="author"
 				required
@@ -124,20 +127,21 @@ const AddComment = () => {
 				className={classes.input}
 			/>
 			<textarea
-				placeholder="Enter comment here..."
+				placeholder={t('commentContentPlaceholder')}
 				name="text"
 				required
 				minLength={3}
 				maxLength={250}
 				className={classes.input}
 			/>
-			<button type="submit">Submit</button>
-			{error && <span className={classes.warn}>Error: {error.message}</span>}
+			<button type="submit">{t('submit')}</button>
+			{error && <span className={classes.warn}>{t('error')}: {error.message}</span>}
 		</form>
 	);
 };
 
 const Comments = () => {
+	const { t } = useTranslation();
 	const postSlug = window.location.pathname.split('/')[1];
 	const [{ data, error, fetching }] = useQuery<IRes>({
 		query: GET_COMMENTS,
@@ -145,13 +149,13 @@ const Comments = () => {
 	});
 
 	if (fetching) {
-		return <CommentWrapper>Loading...</CommentWrapper>;
+		return <CommentWrapper>{t('loading')}</CommentWrapper>;
 	}
 	if (error) {
-		return <CommentWrapper>Error: {error.message}</CommentWrapper>;
+		return <CommentWrapper>{t('error')}: {error.message}</CommentWrapper>;
 	}
 	if (!data || !data.getComments.length) {
-		return <CommentWrapper>Nothing to show...</CommentWrapper>;
+		return <CommentWrapper>{t('nothingToShow')}</CommentWrapper>;
 	}
 
 	return (

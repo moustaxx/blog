@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next';
 import { makeStyles } from '@material-ui/styles';
 import Img, { FluidObject } from 'gatsby-image';
 import kebabCase from 'kebab-case';
@@ -72,6 +73,7 @@ export const PostTemplate = ({
 }: IPostTemplate) => {
 	const classes = useStyles();
 	const commonClasses = useCommonStyles();
+	const { t } = useTranslation();
 
 	return (
 		<article className={commonClasses.content}>
@@ -90,7 +92,7 @@ export const PostTemplate = ({
 				<ReactMarkdown source={content} />
 				{tags.length && (
 					<>
-						<h3 className={classes.tagsHeading}>Tags</h3>
+						<h3 className={classes.tagsHeading}>{t('tags')}</h3>
 						{tags.map(({ name: tagName }) => (
 							<Link
 								to={`/tags/${kebabCase(tagName)}/`}

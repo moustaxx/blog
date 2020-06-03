@@ -1,6 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import Layout from '../components/Layout';
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 
 const Error404 = () => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 
 	if (typeof window !== 'undefined') {
 		const goBack = () => window.history.back();
@@ -39,24 +41,24 @@ const Error404 = () => {
 			<Layout>
 				<div className={classes.root}>
 					<h1 className={classes.heading}>404</h1>
-					<span>Page not found</span>
+					<span>{t('pageNotFound')}</span>
 					<code className={classes.path}>{window.location.pathname}</code>
 					<div className={classes.buttonsContainer}>
 						<button
 							className={classes.btn}
 							onClick={goBack}
 							onKeyDown={goBack}
-							aria-label="Go back to recent page"
+							aria-label={t('goBackToRecentPage')}
 							type="button"
-							children="Go back"
+							children={t('goBack')}
 						/>
 						<button
 							className={classes.btn}
 							onClick={goHome}
 							onKeyDown={goHome}
-							aria-label="Go to homepage"
+							aria-label={t('goToHomePage')}
 							type="button"
-							children="Go to homepage"
+							children={t('goToHomePage')}
 						/>
 					</div>
 				</div>

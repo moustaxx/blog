@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/prefer-default-export */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const React = require('react');
-const { Provider, createClient } = require('urql');
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
+import { Provider, createClient } from 'urql';
 
 const client = createClient({
 	url: 'https://personal-blogg.herokuapp.com/graphql',

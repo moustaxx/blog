@@ -2,7 +2,8 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { makeStyles } from '@material-ui/styles';
 import Img, { FluidObject } from 'gatsby-image';
-import { Link } from 'gatsby';
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next';
+import { DateTime } from 'luxon';
 
 const useStyles = makeStyles({
 	post: {
@@ -25,7 +26,7 @@ interface IPostListItem {
 	id: string;
 	slug: string;
 	title: string;
-	date: Date | string;
+	date: string;
 	imgFluid?: FluidObject;
 	content: string;
 }
@@ -39,16 +40,27 @@ const sliceText = (text: string) => {
 
 const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListItem) => {
 	const classes = useStyles();
+	const { i18n } = useTranslation();
+
+	const baseDate = DateTime.fromISO(date).setLocale(i18n.language);
+	const parsedDate = baseDate.toLocaleString(DateTime.DATE_MED);
+	const dateRelative = baseDate.toRelative();
+	const dateTime = baseDate.toLocaleString(DateTime.DATETIME_MED);
+
 	return (
 		<article className={classes.post} key={id}>
 			<h1>
 				<Link
-					to={slug}
+					to={`/${slug}`}
 					className={classes.title}
 					children={title}
 				/>
 			</h1>
-			<h4 className={classes.date}>{date}</h4>
+			<h4
+				className={classes.date}
+				title={dateTime}
+				children={`${parsedDate}, ${dateRelative}`}
+			/>
 			{imgFluid && <Img fluid={imgFluid} className={classes.featuredImg} />}
 			<ReactMarkdown source={sliceText(content)} />
 		</article>
