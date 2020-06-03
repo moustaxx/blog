@@ -20,6 +20,17 @@ const useStyles = makeStyles({
 	featuredImg: {
 		margin: '16px 0',
 	},
+	content: {
+		'& > p': {
+			marginBottom: '.6em',
+		},
+	},
+	link: {
+		background: 'none',
+		textShadow: 'none',
+		textDecoration: 'underline',
+		color: 'crimson',
+	},
 }, { name: 'PostListItem' });
 
 interface IPostListItem {
@@ -40,7 +51,7 @@ const sliceText = (text: string) => {
 
 const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListItem) => {
 	const classes = useStyles();
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 
 	const baseDate = DateTime.fromISO(date).setLocale(i18n.language);
 	const parsedDate = baseDate.toLocaleString(DateTime.DATE_MED);
@@ -61,8 +72,18 @@ const PostListItem = ({ id, slug, title, date, imgFluid, content }: IPostListIte
 				title={dateTime}
 				children={`${parsedDate}, ${dateRelative}`}
 			/>
-			{imgFluid && <Img fluid={imgFluid} className={classes.featuredImg} />}
-			<ReactMarkdown source={sliceText(content)} />
+			<Link
+				to={`/${slug}`}
+				className={classes.title}
+			>
+				{imgFluid && <Img fluid={imgFluid} className={classes.featuredImg} />}
+			</Link>
+			<ReactMarkdown className={classes.content} source={sliceText(content)} />
+			<Link
+				to={`/${slug}`}
+				className={classes.link}
+				children={t('showMore')}
+			/>
 		</article>
 	);
 };
