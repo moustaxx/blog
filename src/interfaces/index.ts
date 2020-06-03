@@ -33,6 +33,8 @@ export type TStrapiArticle = {
 			fluid: FluidObject;
 		};
 	};
+	title_pl?: string;
+	content_pl?: string;
 };
 
 export interface IGetPosts {

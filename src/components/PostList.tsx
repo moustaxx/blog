@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import PostListItem from './PostListItem';
 import { IGetPosts } from '../interfaces';
+import { useI18next } from '../utils/useI18next';
 
 const getPosts = graphql`
 	query getPosts {
@@ -30,6 +31,8 @@ const getPosts = graphql`
 							}
 						}
 					}
+					title_pl
+					content_pl
 				}
 			}
 		}
@@ -39,10 +42,17 @@ const getPosts = graphql`
 const PostList = () => {
 	const data = useStaticQuery<IGetPosts>(getPosts);
 	const { edges } = data.allStrapiArticles;
+	const { i18n } = useI18next();
 
 	return (
 		<div>
 			{edges.map(({ node }) => {
+				const translatedTitle = i18n.language === 'pl' && node.title_pl
+					? node.title_pl
+					: node.title;
+				const translatedContent = i18n.language === 'pl' && node.content_pl
+					? node.content_pl
+					: node.content;
 				const imgFluid = node.image
 					&& node.image.childImageSharp.fluid;
 
@@ -51,10 +61,10 @@ const PostList = () => {
 						key={node.id}
 						id={node.id}
 						slug={node.slug}
-						title={node.title}
+						title={translatedTitle}
 						date={node.created_at}
 						imgFluid={imgFluid}
-						content={node.content}
+						content={translatedContent}
 					/>
 				);
 			})}

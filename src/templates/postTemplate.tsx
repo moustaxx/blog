@@ -12,6 +12,7 @@ import useCommonStyles from './commonStyles';
 import { author } from '../../website';
 import { IThemeInterface } from '../utils/theme';
 import { TStrapiArticle } from '../interfaces';
+import { useI18next } from '../utils/useI18next';
 
 const useStyles = makeStyles((theme: IThemeInterface) => ({
 	featuredImg: {
@@ -112,15 +113,22 @@ export const PostTemplate = ({
 const PostPage = ({ data }: IStrapiArticle) => {
 	const { strapiArticles } = data;
 	const fluid = strapiArticles.image && strapiArticles.image.childImageSharp.fluid;
+	const { i18n } = useI18next();
+	const translatedTitle = i18n.language === 'pl' && strapiArticles.title_pl
+		? strapiArticles.title_pl
+		: strapiArticles.title;
+	const translatedContent = i18n.language === 'pl' && strapiArticles.content_pl
+		? strapiArticles.content_pl
+		: strapiArticles.content;
 
 	return (
 		<Layout>
 			<PostTemplate
-				title={strapiArticles.title}
+				title={translatedTitle}
 				tags={strapiArticles.tags}
 				date={strapiArticles.created_at}
 				featuredImgFluid={fluid}
-				content={strapiArticles.content}
+				content={translatedContent}
 			/>
 		</Layout>
 
@@ -144,6 +152,8 @@ export const pageQuery = graphql`
 					}
 				}
 			}
+			title_pl
+			content_pl
 		}
 	}
 `;

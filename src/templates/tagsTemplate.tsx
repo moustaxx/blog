@@ -18,7 +18,7 @@ interface ITagsTemplate {
 export const TagsTemplate = ({ data, pageContext }: ITagsTemplate) => {
 	const commonClasses = useCommonStyles();
 	const { edges } = data.allStrapiArticles;
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	return (
 		<Layout>
@@ -29,16 +29,22 @@ export const TagsTemplate = ({ data, pageContext }: ITagsTemplate) => {
 					{edges.map(({ node }) => {
 						const imgFluid = node.image
 							&& node.image.childImageSharp.fluid;
+						const translatedTitle = i18n.language === 'pl' && node.title_pl
+							? node.title_pl
+							: node.title;
+						const translatedContent = i18n.language === 'pl' && node.content_pl
+							? node.content_pl
+							: node.content;
 
 						return (
 							<PostListItem
 								key={node.id}
 								id={node.id}
 								slug={node.slug}
-								title={node.title}
+								title={translatedTitle}
 								date={node.created_at}
 								imgFluid={imgFluid}
-								content={node.content}
+								content={translatedContent}
 							/>
 						);
 					})}
@@ -73,6 +79,8 @@ export const pageQuery = graphql`
 							}
 						}
 					}
+					title_pl
+					content_pl
 				}
 			}
 		}
