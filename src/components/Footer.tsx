@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: IThemeInterface) => ({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+		flexDirection: 'column',
 		color: 'grey',
 	},
 	link: {
@@ -34,8 +35,14 @@ const Footer = () => {
 
 	return (
 		<footer className={classes.root}>
-			<div>{t('footer')}</div>
-			<a href={config.gitAccount} className={classes.link}>moustaxx</a>
+			<div>
+				<span>{t('footer')}</span>
+				<a href={config.gitAccount} className={classes.link}>moustaxx</a>
+			</div>
+			<div>
+				<span>{t('checkMyOtherProject')}</span>
+				<a href={config.maChatLink} className={classes.link}>MaChat</a>
+			</div>
 		</footer>
 	);
 };
